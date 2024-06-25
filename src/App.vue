@@ -1,11 +1,13 @@
 <script setup>
 import AcceuilComponent from "@/components/AcceuilComponent.vue";
+import AbilityComponents from "./components/AbilityComponents.vue";
 
 </script>
 
 <template>
 <div>
-  <AcceuilComponent></AcceuilComponent>
+  <!-- <AcceuilComponent></AcceuilComponent> -->
+  <AbilityComponents/>
 </div>
 </template>
 
