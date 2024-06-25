@@ -36,6 +36,8 @@
                     battre. Si vous pensez avoir ce qu'il faut pour faire mieux, n'hésitez pas à télécharger une vidéo de
                     vous en train de faire ce test sur Youtube et à nous envoyer le lien. Vous pouvez repasser ce test
                     autant de fois que vous le souhaitez sans aucun impact sur votre score final !</p>
+
+                    <p>Petit changmeent apporté par Christiane</p>
             </div>
 
             <div>
