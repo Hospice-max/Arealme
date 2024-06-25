@@ -1,11 +1,13 @@
 <script setup>
 import AcceuilComponent from "@/components/AcceuilComponent.vue";
 
+
 </script>
 
 <template>
 <div>
-  <AcceuilComponent></AcceuilComponent>
+  <!-- <AcceuilComponent></AcceuilComponent> -->
+  <RouterView/>
 </div>
 </template>
 

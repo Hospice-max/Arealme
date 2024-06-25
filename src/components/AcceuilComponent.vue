@@ -45,7 +45,8 @@
                     </p>
                 </div>
                 <div>
-                    <button><RouterLink to="#">Commencer</RouterLink></button>
+                    <button><RouterLink to="/reactivityTest">Commencer</RouterLink></button>
+                    
                     <p>Défi des joueurs professionnels</p>
                 </div>
             </article>
@@ -69,9 +70,6 @@
         color: rgba(229, 229, 229);;
         background: rgba(229, 229, 229);
         box-sizing: border-box;
-    }
-    .timer{
-        
     }
     h1{
         background-color: rgba(24, 128, 56) ;
