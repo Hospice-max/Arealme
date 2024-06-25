@@ -1,6 +1,7 @@
 <script setup>
 import AcceuilComponent from "@/components/AcceuilComponent.vue";
 
+// import TimerComponent from "@/components/TimerComponents.vue";
 
 </script>
 
@@ -9,6 +10,7 @@ import AcceuilComponent from "@/components/AcceuilComponent.vue";
   <!-- <AcceuilComponent></AcceuilComponent> -->
   <RouterView/>
 </div>
+<!-- <div> <TimerComponent></TimerComponent> </div> -->
 </template>
 
 <style scoped>
