@@ -10,8 +10,9 @@
                 <input type="text" required>
             </form>
             <div class="button">
-                <button class="btn1" type="submit">D'ACCORD</button>
-                <button class="btn2" type="reset">Annuler</button>
+                <RouterLink class="btn1" to="#">D'ACCORD</RouterLink>
+    
+                <RouterLink class="btn2" to="#">Annuler</RouterLink>
             </div>
         </div>
     
@@ -35,21 +36,21 @@
 
 .div {
     text-align: center;
-    border: 1px solid rgb(255, 255, 255) ;
-    background-color: rgb(255, 255, 255) ;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
     padding: 30px;
     border-radius: 5px;
     width: 30%;
-    
+
 }
 
 input {
     max-width: 100%;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     border: 1px solid gray;
     border-radius: 3px;
-    margin-top: 3px;
+    margin-top: 8px;
 }
 
 .button {
@@ -57,20 +58,24 @@ input {
     display: flex;
     justify-content: center;
     gap: 3%;
+    padding: 8px;
 }
 
-.btn1{
+.btn1 {
     background-color: rgb(13, 110, 253);
     color: white;
     padding: 8px;
     border: none;
     border-radius: 4px;
+    text-decoration: none;
 }
-.btn2{
+
+.btn2 {
     background-color: white;
     color: rgb(13, 110, 253);
     padding: 10px;
     border: 1px solid rgb(13, 110, 253);
     border-radius: 4px;
+    text-decoration: none;
 }
 </style>
