@@ -17,7 +17,7 @@ onMounted(() => {
 
 <template>
   <div class="textContainer">
-    <p v-if="isRed">ATTENDEZ LE VERT <span>...</span> </p>
+    <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span> </p>
     <p v-else>MAINTENANT!</p>
   <div class="test_circle" :class="{ red: isRed, green: !isRed }">
     <!-- <p id="count">1</p> -->
@@ -33,16 +33,43 @@ onMounted(() => {
 }
 
 .red {
-  background-color: red;
-  border: 1px solid red;
+  background-color: rgb(230, 55, 55);
+  border: 12px solid rgb(150, 50, 78);
+  cursor: pointer;
 }
 
 .green {
-  background-color: green;
-  border: 1px solid green;
+  background-color: #0cf264;
+  border: 12px solid rgb(35, 165, 121);
+  cursor: pointer;
 }
 
 .textContainer{
   text-align: center;
 }
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+p{
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+
 </style>
