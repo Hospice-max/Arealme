@@ -1,16 +1,18 @@
 <script setup>
 import AcceuilComponent from "@/components/AcceuilComponent.vue";
-
-// import TimerComponent from "@/components/TimerComponents.vue";
+import scoreComponents from "@/components/scoreComponents.vue"
+import TimerComponent from "@/components/TimerComponents.vue";
 
 </script>
 
 <template>
 <div>
-  <!-- <AcceuilComponent></AcceuilComponent> -->
+  <AcceuilComponent></AcceuilComponent>
+  <router-link to="/"></router-link>
+  <div> <TimerComponent></TimerComponent> </div>
+  <scoreComponents/>
   <RouterView/>
 </div>
-<!-- <div> <TimerComponent></TimerComponent> </div> -->
 </template>
 
 <style scoped>

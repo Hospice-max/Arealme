@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="div">
+    <div>
         <nav>
             <RouterLink  to="#"><img src="/src/assets/Menu.png" alt="Menu"></RouterLink>
 
@@ -16,7 +16,7 @@
             <RouterLink class="timer" to="#"><img src="/src/assets/Timer.png" alt="Timer"></RouterLink>
         </nav>
         
-        <div>
+        <div class="div">
             <article>
                 <h1>Test de temps de réaction | Rapports statistiques + vidéo des records du monde</h1>
                 <div>
@@ -45,8 +45,7 @@
                     </p>
                 </div>
                 <div>
-                    <button><RouterLink to="/reactivityTest">Commencer</RouterLink></button>
-                    
+                    <RouterLink class="start" to="/reactivityTest">Commencer</RouterLink>
                     <p>Défi des joueurs professionnels</p>
                 </div>
             </article>
@@ -55,11 +54,24 @@
 </template>
 
 <style scoped>
+    .div{
+        position: relative;
+        border: 1px solid black;
+        padding: 20px;
+        max-width: 100%;
+        width: 50%;
+        margin-top: 3%;
+        margin-left: 20%;
+        
+    }
     nav {
+        box-sizing: border-box;
+        position: relative;
         display: flex;
         align-items: center;
         gap: 1.5%;
         background: rgba(229, 229, 229);
+        padding: 8px;
     }
    
     img{
@@ -71,7 +83,13 @@
         background: rgba(229, 229, 229);
         box-sizing: border-box;
     }
+    .timer{
+        position: absolute;
+        right: 0;
+        margin-right: 28%;
+    }
     h1{
+        margin-top: 0;
         background-color: rgba(24, 128, 56) ;
         color: white;
         text-align: center;
@@ -80,6 +98,19 @@
         display: flex;
         list-style: none;
         gap: 2%;
+        
+    }
+    p{
+        font-size: 20px;
+    }
+    .start{
+        background-color: rgb(13, 110, 253);
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        max-width: 10%;
         
     }
    
