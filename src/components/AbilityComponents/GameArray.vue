@@ -1,13 +1,18 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 let time = Math.floor(Math.random() * 2500);
 console.log(time);
 const isRed = ref(true);
+let count = 0;
+let intervalId = setInterval(() => {
+  // count.value++;
+}, 1);
 
 const startGame = () => {
   setTimeout(() => {
     isRed.value = false;
   }, time);
+  setInterval(() => {}, 1);
 };
 
 onMounted(() => {
@@ -17,12 +22,16 @@ onMounted(() => {
 
 <template>
   <div class="textContainer">
-    <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span> </p>
+    <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
     <p v-else>MAINTENANT!</p>
-  <div class="test_circle" :class="{ red: isRed, green: !isRed }">
-    <!-- <p id="count">1</p> -->
+    <div
+      class="test_circle"
+      :class="{ red: isRed, green: !isRed }"
+      @click="intervalId"
+    >
+      <!-- <p id="count">1</p> -->
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -44,7 +53,7 @@ onMounted(() => {
   cursor: pointer;
 }
 
-.textContainer{
+.textContainer {
   text-align: center;
 }
 
@@ -64,12 +73,10 @@ onMounted(() => {
   }
 }
 
-p{
+p {
   color: white;
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 25px;
 }
-
-
 </style>
