@@ -19,6 +19,7 @@ const taked = ref(3);
     <div>
         <nav>
                 <div class="myNav">
+                    <!-- les différents liens de la barre de navigation -->
                     <RouterLink class="menu" to="error"><img src="/src/assets/Menu.png" alt="Menu"></RouterLink>
                     
                     <RouterLink class="areal" to="error">
@@ -39,6 +40,7 @@ const taked = ref(3);
                 <div>
                     <ul>
                         <span>Attempts:</span>
+                        <!-- Parcours du tableau des chiffres et initialisation de l'action qu'effectuera l'évènement @click -->
                         <li  v-for="(dig, index) in number" :key="index">
                             <button  
                                     class="list" 
@@ -51,6 +53,7 @@ const taked = ref(3);
                 </div>
 
                 <div>
+                    <!-- Textes de la page d'acceuil -->
                     <p>Si vous vous êtes déjà demandé si votre cerveau était capable de traiter rapidement des informations
                         visuelles ou non, ce quiz simple est fait pour vous ! La règle est très simple : lorsque  le
                         cercle rouge tourne vert, appuyez/cliquez sur le bouton gauche de la souris sur l'écran aussi vite que possible
@@ -65,6 +68,7 @@ const taked = ref(3);
                     </p>
                 </div>
                 <div class="end">
+                    <!-- Redirection du boutton commencer ver la page du jeu -->
                     <RouterLink 
                     class="start" 
                     :to="{name: 'Ability', params: {id:taked}}">Commencer</RouterLink>
