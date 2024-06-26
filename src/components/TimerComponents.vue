@@ -1,24 +1,29 @@
 <template>
   <div class="big">
-    <p>0000.0 MS</p>
+    <p>{{childrenProps.green}} MS</p>
     <div class="elCenter">
       <div class="container">
         <p>{{ decompteVal }}</p>
       </div>
     </div>
-    <div>5/5</div>
+    <div>{{childrenProps.id}}/{{childrenProps.atTaked}}</div>
   </div>
+
 </template>
 
 <script setup>
 import { ref } from "vue";
 const decompteVal = ref(3);
 
+const props = defineProps(["childrenProps"]);
+const emit = defineEmits(['response']);
+
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
-    if (decompteVal.value === 1) {
+    if (decompteVal.value <1) {
       clearInterval(myReact);
+      emit("response", true);
     }
   }, 1000);
 }
@@ -40,11 +45,9 @@ deCompte();
 }
 
 .span {
-    display: flex;
-    
-    margin-right: 50rem;
- 
-    
+  display: flex;
+
+  margin-right: 50rem;
 }
 .elCenter {
   display: flex;
@@ -58,6 +61,5 @@ deCompte();
   align-content: center; */
   text-align: center;
   margin: 0 auto;
- 
 }
 </style>

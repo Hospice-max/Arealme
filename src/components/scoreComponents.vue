@@ -26,7 +26,6 @@
 
   </div>
 </template>
-
 <script setup>
 import { ref, onMounted } from "vue";
 import StarsComponent from "@/components/StarsComponent.vue";

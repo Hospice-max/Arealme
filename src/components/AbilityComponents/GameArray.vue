@@ -1,5 +1,8 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, reactive } from "vue";
+import scoreComponents from "@/components/scoreComponents.vue";
+import TimerComponents from "@/components/TimerComponents.vue";
+
 let time = Math.floor(Math.random() * 3000);
 console.log(time);
 const isRed = ref(true);
@@ -9,6 +12,18 @@ let badClick = ref(0);
 let survey = ref(true);
 let diffTime = ref(0);
 let gameTab = ref([]);
+let idValue = ref(1);
+let childrenProps = reactive({ 
+  id: "", 
+  green: "",
+  atTaked:3,
+ });
+let change = ref(true);
+
+const method=(param)=>{
+  change.value = param;
+};
+
 
 function clickReact() {
   if (isRed.value === true) {
@@ -17,7 +32,15 @@ function clickReact() {
   } else {
     endTime.value = performance.now();
     diffTime.value = (endTime.value - startTime.value).toFixed(2);
-    console.log(diffTime.value);
+    gameTab.value.push({
+      id: idValue.value,
+      green: diffTime.value,
+      red: badClick.value,
+    });
+    childrenProps.id = idValue.value;
+    childrenProps.green = diffTime.value;
+    console.log(childrenProps);
+    change.value= false;
   }
 }
 
@@ -37,13 +60,21 @@ onMounted(() => {
 
 <template>
   <div class="textContainer">
-    <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
-    <p v-else>MAINTENANT!</p>
-    <div
-      class="test_circle"
-      :class="{ red: isRed, green: !isRed }"
-      @click="survey = !survey"
-    ></div>
+    <div v-if="change=== true">
+      <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
+      <p v-else>MAINTENANT!</p>
+      <div
+        class="test_circle"
+        :class="{ red: isRed, green: !isRed }"
+        @click="survey = !survey"
+      ></div>
+    </div>
+
+    <TimerComponents
+     v-else-if="change===false"
+      :childrenProps="childrenProps"
+      @response="method"
+      />
   </div>
 </template>
 
