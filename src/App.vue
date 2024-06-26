@@ -1,14 +1,14 @@
 <script setup>
 import AcceuilComponent from "@/views/AcceuilPage.vue";
-import scoreComponents from "@/components/scoreComponents.vue"
+
 </script>
 
 <template>
+<!-- Affichage de la page principale -->
 <div>
-   <router-link to="/"></router-link>
+  <RouterLink to="/"></RouterLink>
   <RouterView/>
 </div>
-<scoreComponents/>
 </template>
 
 <style scoped>
