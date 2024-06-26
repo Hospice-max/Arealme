@@ -13,17 +13,30 @@ let survey = ref(true);
 let diffTime = ref(0);
 let gameTab = ref([]);
 let idValue = ref(1);
-let childrenProps = reactive({ 
-  id: "", 
+let childrenProps = reactive({
+  id: "",
   green: "",
-  atTaked:3,
- });
+  atTaked: 3,
+});
 let change = ref(true);
+let newTemp = 3;
 
-const method=(param)=>{
-  change.value = param;
+const gameData = ref({});
+
+const method = (param) => {
+  if (idValue.value <= newTemp) {
+    change.value = param;
+    startGame();
+  }
 };
 
+let reboot = () => {
+  isRed.value = true;
+  endTime.value = 0;
+  diffTime.value = 0;
+  startGame.value = 0;
+  badClick.value = 0;
+};
 
 function clickReact() {
   if (isRed.value === true) {
@@ -31,24 +44,44 @@ function clickReact() {
     console.log(badClick.value);
   } else {
     endTime.value = performance.now();
+
     diffTime.value = (endTime.value - startTime.value).toFixed(2);
+
     gameTab.value.push({
       id: idValue.value,
       green: diffTime.value,
       red: badClick.value,
     });
+
     childrenProps.id = idValue.value;
+
     childrenProps.green = diffTime.value;
+
+    idValue.value++;
+
     console.log(childrenProps);
-    change.value= false;
+
+    change.value = false;
+
+    reboot();
   }
 }
 
 const startGame = () => {
-  setTimeout(() => {
+  const timeoutId = setTimeout(() => {
     isRed.value = false;
     startTime.value = performance.now();
+    console.log("timout lancé");
+    if (idValue.value > newTemp) {
+      clearTimeout(timeoutId);
+    }
+
+    console.log("startGame timeout");
   }, time);
+};
+
+const atGameEnd = (data) => {
+  gameData.value = data;
 };
 
 watch(() => survey.value, clickReact);
@@ -60,7 +93,7 @@ onMounted(() => {
 
 <template>
   <div class="textContainer">
-    <div v-if="change=== true">
+    <div v-if="change === true">
       <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
       <p v-else>MAINTENANT!</p>
       <div
@@ -71,10 +104,11 @@ onMounted(() => {
     </div>
 
     <TimerComponents
-     v-else-if="change===false"
+      v-else-if="change === false"
       :childrenProps="childrenProps"
       @response="method"
-      />
+      @emitGameData="atGameEnd"
+    />
   </div>
 </template>
 
