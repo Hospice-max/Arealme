@@ -1,22 +1,38 @@
 <template>
-  <div class="big">
-    <p>{{ childrenProps.green }} MS</p>
-    <div class="elCenter">
-      <div class="container">
-        <p>{{ decompteVal }}</p>
-      </div>
+  <div class="timer-container">
+    <div v-show="childrenProps.id !== 1" class="chart-container">
+      <ChartComponent :durations="durations" />
     </div>
-    <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
-    <Formulaire
-      v-if="childrenProps.id === childrenProps.atTaked"
-      @emmitGamerName="sendGameData"
-    />
+
+    <div class="big">
+      <p>{{ childrenProps.green[childrenProps.id - 1] }} MS</p>
+      <div class="elCenter">
+        <div
+          v-if="childrenProps.id !== childrenProps.atTaked"
+          class="container"
+        >
+          <p>{{ decompteVal }}</p>
+        </div>
+        <div v-else>Evaluation...</div>
+      </div>
+      <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
+      <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
+      <!-- <Formulaire v-show="isFormVisible" @emmitGamerName="sendGameData" /> -->
+    </div>
+    <!-- <div>
+      <ScoreComponent />
+    </div> -->
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import Formulaire from "./Formulaire.vue";
+import ChartComponent from "@/components/ChartComponent.vue";
+
+// components
+import ScoreComponent from "./ScoreComponent.vue";
+import { watch } from "vue";
 
 const decompteVal = ref(3);
 const gameSessionData = ref({
@@ -24,11 +40,26 @@ const gameSessionData = ref({
   date: "",
 });
 
+const durations = ref([]);
+
+const isChartVisible = ref(false);
+const isFormVisible = ref(false);
+
 let array = [1, 2, 3, 4, 5];
 
 const props = defineProps({
   childrenProps: Object,
+  gameRoundsData: Array,
+  currentTentative: Number,
 });
+
+durations.value.push(props.childrenProps.id);
+durations.value = [...props.childrenProps.green.map((el) => parseFloat(el))];
+
+console.log("durations : ", durations.value);
+
+// console.log("test", ids.value, durations.value);
+// console.log("currentTentative", props.currentTentative);
 
 const emit = defineEmits(["response", "emitGameData"]);
 
@@ -42,17 +73,31 @@ function moy(element) {
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
+    console.log("decomptVal => ", decompteVal.value);
     if (decompteVal.value < 1) {
       clearInterval(myReact);
-      emit("response", true);
+      if (props.childrenProps.id === props.childrenProps.atTaked) {
+        moy(durations.value);
+        isFormVisible.value = true;
+      } else {
+        emit("response", true);
+      }
     }
-    console.log("deCompte setIntervalle");
   }, 1000);
 }
 
 onMounted(() => {
   deCompte();
+  showChart();
 });
+
+function showChart() {
+  isChartVisible.value = true;
+}
+
+function showForm() {
+  isFormVisible.value = true;
+}
 
 function sendGameData(name) {
   gameSessionData.value.gamerName = name;
@@ -84,6 +129,10 @@ function dateGenerator() {
 </script>
 
 <style scoped>
+.timer-container {
+  display: flex;
+}
+
 .container {
   text-align: center;
   border: 20px solid rgb(206, 26, 26);

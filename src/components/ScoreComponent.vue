@@ -12,12 +12,6 @@
     <StarsComponent :stars="scoreData.stars" />
   </div>
 
-  <h1>Chart Component</h1>
-  <div class="chart-container">
-    <ChartComponent />
-  </div>
-
-  <h1>Chart Component</h1>
 
    
   <HighscoresTableComponent />
@@ -30,7 +24,7 @@
 import { ref, onMounted } from "vue";
 import StarsComponent from "@/components/StarsComponent.vue";
 
-import ChartComponent from "@/components/ChartComponent.vue";
+
 import HighscoresTableComponent from "@/components/HighscoresTableComponent.vue"
 
 const plafond = 3000;

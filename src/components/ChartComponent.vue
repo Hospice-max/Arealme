@@ -9,21 +9,29 @@
 import { ref, onMounted } from "vue";
 import Chart from "chart.js/auto";
 
+const props = defineProps({
+  durations: Array,
+});
+
+const ids = ref([]);
+
 const graph = ref(null);
 
 const abscisse = [1, 2, 3]; // tentatives (ils doivent être dynamiques)
 const data = [500, 420, 800]; // temps mis pour chaque tentative
-
+for (let key in props.durations) {
+  ids.value.push(parseInt(key) + 1);
+}
 onMounted(() => {
   if (graph.value) {
     const ctx = graph.value.getContext("2d");
 
     const dataCanvas = {
-      labels: abscisse,
+      labels: ids.value,
       datasets: [
         {
           label: "Progression du test en cours",
-          data: data,
+          data: props.durations,
           fill: false,
           borderColor: "white",
           pointBorderColor: "#7CFC00",

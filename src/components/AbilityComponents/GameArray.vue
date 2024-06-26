@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, watch, reactive } from "vue";
-import scoreComponents from "@/components/scoreComponents.vue";
+import scoreComponents from "@/components/ScoreComponent.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
 
 let time = Math.floor(Math.random() * 3000);
@@ -13,9 +13,9 @@ let survey = ref(true);
 let diffTime = ref(0);
 let gameTab = ref([]);
 let idValue = ref(1);
-let childrenProps = reactive({
+const childrenProps = ref({
   id: "",
-  green: "",
+  green: [],
   atTaked: 3,
 });
 let change = ref(true);
@@ -53,13 +53,13 @@ function clickReact() {
       red: badClick.value,
     });
 
-    childrenProps.id = idValue.value;
-
-    childrenProps.green = diffTime.value;
+    childrenProps.value.id = idValue.value;
+    childrenProps.value.green.push(diffTime.value);
 
     idValue.value++;
+    console.log("idValue ", idValue.value);
 
-    console.log(childrenProps);
+    console.log(childrenProps.value);
 
     change.value = false;
 
@@ -106,6 +106,8 @@ onMounted(() => {
     <TimerComponents
       v-else-if="change === false"
       :childrenProps="childrenProps"
+      :currentTentative="idValue"
+      :gameRoundsData="gameTab"
       @response="method"
       @emitGameData="atGameEnd"
     />
