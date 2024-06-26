@@ -8,11 +8,6 @@ import FormulaireVue from "./components/Formulaire.vue";
 
 <template>
 <div>
-  <AcceuilComponent></AcceuilComponent>
-  <router-link to="/"></router-link>
-  <div> <TimerComponent></TimerComponent> </div>
-  <FormulaireVue></FormulaireVue>
-   <router-link to="/"></router-link>
   <RouterView/>
 </div>
 
