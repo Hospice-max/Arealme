@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AcceuilComponent from "@/components/AcceuilComponent.vue";
 // import AbilityComponent from "@/components/AbilityComponents.vue";
+import AbilityComponent from "@/components/AbilityComponents/GameArray.vue";
 import Timer from "@/components/TimerComponents.vue";
 import AbilityPage from '@/views/AbilityPage.vue';
 
@@ -26,6 +27,10 @@ const router = createRouter({
       path :"/AbilityPage",
       name : 'AbilityPage' ,
       component : AbilityPage}
+      name : 'Time' ,
+      component :Timer,
+      component : AbilityPage
+    }
 
   ]
 })

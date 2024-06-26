@@ -1,14 +1,34 @@
 <script setup>
-import { ref, onMounted } from "vue";
-let time = Math.floor(Math.random() * 2500);
+import { ref, onMounted, watch } from "vue";
+let time = Math.floor(Math.random() * 3000);
 console.log(time);
 const isRed = ref(true);
+let startTime = ref(0);
+let endTime = ref(0);
+let badClick = ref(0);
+let survey = ref(true);
+let diffTime = ref(0);
+let gameTab = ref([]);
+
+function clickReact() {
+  if (isRed.value === true) {
+    badClick.value++;
+    console.log(badClick.value);
+  } else {
+    endTime.value = performance.now();
+    diffTime.value = (endTime.value - startTime.value).toFixed(2);
+    console.log(diffTime.value);
+  }
+}
 
 const startGame = () => {
   setTimeout(() => {
     isRed.value = false;
+    startTime.value = performance.now();
   }, time);
 };
+
+watch(() => survey.value, clickReact);
 
 onMounted(() => {
   startGame();
@@ -17,12 +37,14 @@ onMounted(() => {
 
 <template>
   <div class="textContainer">
-    <p v-if="isRed">ATTENDEZ LE VERT <span>...</span> </p>
+    <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
     <p v-else>MAINTENANT!</p>
-  <div class="test_circle" :class="{ red: isRed, green: !isRed }">
-    <!-- <p id="count">1</p> -->
+    <div
+      class="test_circle"
+      :class="{ red: isRed, green: !isRed }"
+      @click="survey = !survey"
+    ></div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -33,16 +55,41 @@ onMounted(() => {
 }
 
 .red {
-  background-color: red;
-  border: 1px solid red;
+  background-color: rgb(230, 55, 55);
+  border: 12px solid rgb(150, 50, 78);
+  cursor: pointer;
 }
 
 .green {
-  background-color: green;
-  border: 1px solid green;
+  background-color: #0cf264;
+  border: 12px solid rgb(35, 165, 121);
+  cursor: pointer;
 }
 
-.textContainer{
+.textContainer {
   text-align: center;
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+p {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 25px;
 }
 </style>

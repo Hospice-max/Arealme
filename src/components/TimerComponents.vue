@@ -1,7 +1,4 @@
 <template>
-    <div class="span">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero, ad.
-    </div>
   <div class="big">
     <p>0000.0 MS</p>
     <div class="elCenter">
@@ -20,7 +17,7 @@ const decompteVal = ref(3);
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
-    if (decompteVal.value === 0) {
+    if (decompteVal.value === 1) {
       clearInterval(myReact);
     }
   }, 1000);
