@@ -1,15 +1,17 @@
 <script setup>
+import { ref } from "vue";
 const number = [
-    {digit:3},
-    {digit:5},
-    {digit:10},
-    {digit:15},
-    {digit:20},
-    {digit:'💪30'},
-    {digit:'😂100'},
+    {digit:'3', value:3},
+    {digit:'5', value:5},
+    {digit:'10', value:10},
+    {digit:'15', value:15},
+    {digit:'20', value:20},
+    {digit:'💪30', value:30},
+    {digit:'😂100', value:100},
+
     ]
-    
-    const react = 3;
+const taked = ref(3);
+
 </script>
 
 <template>
@@ -28,7 +30,14 @@ const number = [
                 <div>
                     <ul>
                         <span>Attempts:</span>
-                        <li class="list" v-for="(dig, index) in number" :key="index"><button class="list">{{ dig.digit }}</button></li>
+                        <li  v-for="(dig, index) in number" :key="index">
+                            <button  
+                                    class="list" 
+                                    @click="taked=dig.value"
+                                    :class="{backgroundColor: taked == dig.value}">
+                                    {{ dig.digit }}
+                            </button>
+                        </li>
                     </ul>
                 </div>
 
@@ -47,7 +56,9 @@ const number = [
                     </p>
                 </div>
                 <div class="end">
-                    <RouterLink class="start" to="/reactivityTest">Commencer</RouterLink>
+                    <RouterLink 
+                    class="start" 
+                    :to="{name: 'Ability', params: {id:taked}}">Commencer</RouterLink>
                 </div>
                 <p class="par">Défi des joueurs professionnels</p>
             </article>
@@ -103,6 +114,22 @@ const number = [
         text-align: center;
         text-decoration: none;
         font-size: 16px;
+    }
+    .list{
+        background-color:white ;
+        font-size: 15px;
+        font-weight: bold;
+        opacity: 0.4;
+        cursor: pointer;
+    }
+
+    .list:hover {
+        opacity: 1;
+    }
+    .backgroundColor {
+        background-color: rgb(13, 110, 253);
+        opacity: 1;
+        color: white;
     }
     button{
        border: none; 
