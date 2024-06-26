@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AcceuilPage from "@/views/AcceuilPage.vue";
-import AbilityComponent from "@/components/AbilityComponents/GameArray.vue";
-import Timer from "@/components/TimerComponents.vue";
 import AbilityPage from '@/views/AbilityPage.vue';
+
 
 
 const router = createRouter({
@@ -10,25 +9,26 @@ const router = createRouter({
   routes: [
     {path :"/",
     name : 'acceuil' ,
-    component : AcceuilPage},
-
+    component : AcceuilPage
+    },
     {
       path :"/reactivityTest/:id",
       name : 'Ability' ,
       component : AbilityPage, 
       props: true
     },
-    {
-      path :"/Timer",
-      name : 'Time' ,
-      component :Timer
-    },
+    // {
+    //   path :"/Timer",
+    //   name : 'Time' ,
+    //   component :Timer
+    // },
 
     // { 
     //   path: '/list/:id', 
     // component: User, props: true 
     // }
-]})
+  ]
+})
 
 
 

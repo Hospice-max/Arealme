@@ -10,10 +10,6 @@ const number = [
     ]
 const taked = 3;
 
-
-
-
-
 </script>
 
 <template>

@@ -43,6 +43,7 @@ deCompte();
     display: flex;
     
     margin-right: 50rem;
+ 
     
 }
 .elCenter {
@@ -57,5 +58,6 @@ deCompte();
   align-content: center; */
   text-align: center;
   margin: 0 auto;
+ 
 }
 </style>
