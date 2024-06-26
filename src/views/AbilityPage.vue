@@ -1,7 +1,25 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import GameArray from "@/components/AbilityComponents/GameArray.vue";
+import {  useRouter, useRoute } from "vue-router";
+
 const showCircle = ref(true);
+
+const route = useRoute()
+const router = useRouter()
+
+const array = route.path.split("/")
+const arrayEnd = array.pop()
+
+const table = ['3', '5', '10', '15', '20', '30', '100']
+const bool = table.includes(arrayEnd)
+if(!bool) {
+  router.push('/')
+}
+
+
+
+   
 </script>
 
 <template>
