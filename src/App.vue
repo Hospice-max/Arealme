@@ -8,6 +8,7 @@ import scoreComponents from "@/components/scoreComponents.vue"
    <router-link to="/"></router-link>
   <RouterView/>
 </div>
+<scoreComponents/>
 </template>
 
 <style scoped>
