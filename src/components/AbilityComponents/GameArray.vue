@@ -1,5 +1,8 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, reactive } from "vue";
+import scoreComponents from "@/components/scoreComponents.vue";
+
+
 let time = Math.floor(Math.random() * 3000);
 console.log(time);
 const isRed = ref(true);
@@ -9,6 +12,9 @@ let badClick = ref(0);
 let survey = ref(true);
 let diffTime = ref(0);
 let gameTab = ref([]);
+let idValue = ref(1);
+let childrenProps = reactive({id: '', green: ''});
+
 
 function clickReact() {
   if (isRed.value === true) {
@@ -17,9 +23,12 @@ function clickReact() {
   } else {
     endTime.value = performance.now();
     diffTime.value = (endTime.value - startTime.value).toFixed(2);
+    gameTab.value.push({id: idValue.value, green: diffTime.value, red: badClick.value});
+    childrenProps.id= idValue.value;
+    childrenProps.green= diffTime.value;
     console.log(diffTime.value);
   }
-}
+};
 
 const startGame = () => {
   setTimeout(() => {

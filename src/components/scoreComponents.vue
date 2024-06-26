@@ -49,10 +49,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
+  const props = defineProps(['childrenProps']);
 </script>
 
-<style>
+<style scoped>
 * {
   color: white;
 }

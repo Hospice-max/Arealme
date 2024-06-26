@@ -27,12 +27,8 @@ const router = createRouter({
       path :"/AbilityPage",
       name : 'AbilityPage' ,
       component : AbilityPage}
-      name : 'Time' ,
-      component :Timer,
-      component : AbilityPage
-    }
-
-  ]
-})
+     
+    
+]})
 
 export default router
