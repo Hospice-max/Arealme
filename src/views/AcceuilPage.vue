@@ -8,8 +8,8 @@ const number = [
     {digit:'💪30'},
     {digit:'😂100'},
     ]
-    
-    const react = 3;
+const taked = 3;
+
 </script>
 
 <template>
@@ -28,7 +28,11 @@ const number = [
                 <div>
                     <ul>
                         <span>Attempts:</span>
-                        <li class="list" v-for="(dig, index) in number" :key="index"><button class="list">{{ dig.digit }}</button></li>
+                        <li class="list" v-for="(dig, index) in number" :key="index">
+                            <RouterLink to="" class="list" @click="taked">
+                                {{ dig.digit }}
+                            </RouterLink>
+                        </li>
                     </ul>
                 </div>
 
@@ -47,7 +51,7 @@ const number = [
                     </p>
                 </div>
                 <div class="end">
-                    <RouterLink class="start" to="/reactivityTest">Commencer</RouterLink>
+                    <RouterLink class="start" to="/reactivityTest/2">Commencer</RouterLink>
                 </div>
                 <p class="par">Défi des joueurs professionnels</p>
             </article>

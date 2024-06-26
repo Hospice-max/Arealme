@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-  const props = defineProps(['childrenProps']);
+ 
 </script>
 
 <style scoped>
