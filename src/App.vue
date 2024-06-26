@@ -16,6 +16,7 @@ import FormulaireVue from "./components/Formulaire.vue";
   <FormulaireVue></FormulaireVue>
   <RouterView/>
 </div>
+
 <scoreComponents/>
 </template>
 
