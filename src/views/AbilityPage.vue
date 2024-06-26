@@ -5,8 +5,8 @@ const showCircle = ref(true);
 </script>
 
 <template>
-  <div class="container" @click="showCircle = false">
-    <p id="message" v-if="showCircle">Tap anywhere to start</p>
+  <div :class="{ isMonted: showCircle }" class="container" @click="showCircle = false">
+    <p id="message" v-if="showCircle">Cliquez n'importe où pour commencer</p>
     <GameArray v-else></GameArray>
   </div>
 </template>
@@ -32,6 +32,12 @@ template {
   }
 }
 
+p{
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -39,5 +45,11 @@ template {
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: rgb(58, 87, 139);
 }
+
+.isMonted {
+  cursor: pointer;
+}
+
 </style>

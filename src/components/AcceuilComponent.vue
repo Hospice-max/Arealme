@@ -9,16 +9,17 @@ const number = [
     {digit:'😂100'},
     ]
     
+    const react = 3;
 </script>
 
 <template>
     <div>
         <nav>
-                <RouterLink  to="#"><img src="/src/assets/Menu.png" alt="Menu"></RouterLink>
-                <RouterLink to="#">ZONE MOI</RouterLink>
+                <RouterLink  to="/"><img src="/src/assets/Menu.png" alt="Menu"></RouterLink>
+                <RouterLink to="/">ZONE MOI</RouterLink>
                 <span><img src="/src/assets/Chevron.png" alt=""></span>
-                <RouterLink to="#">Test d'aptitude</RouterLink>
-                <RouterLink class="timer" to="#"><img src="/src/assets/Timer.png" alt="Timer"></RouterLink>
+                <RouterLink to="/">Test d'aptitude</RouterLink>
+                <RouterLink class="timer" to="/"><img src="/src/assets/Timer.png" alt="Timer"></RouterLink>
         </nav>
         
         <div class="div">
@@ -27,7 +28,7 @@ const number = [
                 <div>
                     <ul>
                         <span>Attempts:</span>
-                        <li class="list" v-for="(dig, index) in number" :key="index"><RouterLink>{{ dig.digit }}</RouterLink></li>
+                        <li class="list" v-for="(dig, index) in number" :key="index"><button class="list">{{ dig.digit }}</button></li>
                     </ul>
                 </div>
 
@@ -103,14 +104,6 @@ const number = [
         text-decoration: none;
         font-size: 16px;
     }
-    .list {
-       max-width: 100%;
-       width: 48px;
-       height: 30px;
-       text-align: center;
-             
-    }
-
     button{
        border: none; 
        background-color: rgba(229, 229, 229); 
