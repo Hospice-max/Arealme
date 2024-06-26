@@ -8,7 +8,7 @@ import TimerComponent from "@/components/TimerComponents.vue";
    <router-link to="/"></router-link>
   <RouterView/>
 </div>
-<div> <TimerComponent></TimerComponent> </div>
+<!-- <div> <TimerComponent></TimerComponent> </div> -->
 </template>
 
 <style scoped>

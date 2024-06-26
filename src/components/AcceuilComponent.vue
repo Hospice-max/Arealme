@@ -28,7 +28,7 @@ const number = [
                 <div>
                     <ul>
                         <span>Attempts:</span>
-                        <li class="list" v-for="(dig, index) in number" :key="index"><RouterLink to="#" class="list">{{ dig.digit }}</RouterLink></li>
+                        <li class="list" v-for="(dig, index) in number" :key="index"><button class="list">{{ dig.digit }}</button></li>
                     </ul>
                 </div>
 
@@ -104,11 +104,6 @@ const number = [
         text-decoration: none;
         font-size: 16px;
     }
-    .list {
-       text-align: center;
-       background: rgba(229, 229, 229);
-    }
-
     button{
        border: none; 
        background-color: rgba(229, 229, 229); 
