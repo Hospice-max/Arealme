@@ -1,19 +1,34 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
-let time = Math.floor(Math.random() * 2500);
+let time = Math.floor(Math.random() * 3000);
 console.log(time);
 const isRed = ref(true);
-let count = 0;
-let intervalId = setInterval(() => {
-  // count.value++;
-}, 1);
+let startTime = ref(0);
+let endTime = ref(0);
+let badClick = ref(0);
+let survey = ref(true);
+let diffTime = ref(0);
+let gameTab = ref([]);
+
+function clickReact() {
+  if (isRed.value === true) {
+    badClick.value++;
+    console.log(badClick.value);
+  } else {
+    endTime.value = performance.now();
+    diffTime.value = (endTime.value - startTime.value).toFixed(2);
+    console.log(diffTime.value);
+  }
+}
 
 const startGame = () => {
   setTimeout(() => {
     isRed.value = false;
+    startTime.value = performance.now();
   }, time);
-  setInterval(() => {}, 1);
 };
+
+watch(() => survey.value, clickReact);
 
 onMounted(() => {
   startGame();
@@ -27,10 +42,8 @@ onMounted(() => {
     <div
       class="test_circle"
       :class="{ red: isRed, green: !isRed }"
-      @click="intervalId"
-    >
-      <!-- <p id="count">1</p> -->
-    </div>
+      @click="survey = !survey"
+    ></div>
   </div>
 </template>
 
