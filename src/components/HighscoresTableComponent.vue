@@ -1,11 +1,6 @@
 <script setup>
 import { ref } from "vue";
 const data = ref([
-    {Rank:"0",
-    Name:"GFB",
-    Reaction:"GH",
-    Date:"GH",
-    }
     ]);
 </script>
 
@@ -40,7 +35,16 @@ const data = ref([
 table, tr, td, th {
     border: 1px solid black  ;
     border-collapse:collapse ;
-    height: 2rem;
-    width: 2rem;
+    /* height: 2rem;
+    width: 2rem; */
 }
+ thead {
+    font-size: 50px;
+ }
+
+ tbody{
+    
+ }
+
+
 </style>
