@@ -2,6 +2,8 @@
 import AcceuilComponent from "@/components/AcceuilComponent.vue";
 import scoreComponents from "@/components/scoreComponents.vue"
 import TimerComponent from "@/components/TimerComponents.vue";
+import FormulaireVue from "./components/Formulaire.vue";
+
 
 </script>
 
@@ -10,9 +12,11 @@ import TimerComponent from "@/components/TimerComponents.vue";
   <AcceuilComponent></AcceuilComponent>
   <router-link to="/"></router-link>
   <div> <TimerComponent></TimerComponent> </div>
-  <scoreComponents/>
+  
+  <FormulaireVue></FormulaireVue>
   <RouterView/>
 </div>
+<scoreComponents/>
 </template>
 
 <style scoped>
