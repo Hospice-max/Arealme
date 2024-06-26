@@ -13,7 +13,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import etoiles from "@/components/etoiles.vue";
 </script>

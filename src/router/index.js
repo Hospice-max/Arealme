@@ -17,16 +17,6 @@ const router = createRouter({
       component : AbilityPage, 
       props: true
     },
-    // {
-    //   path :"/Timer",
-    //   name : 'Time' ,
-    //   component :Timer
-    // },
-
-    // { 
-    //   path: '/list/:id', 
-    // component: User, props: true 
-    // }
   ]
 })
 
