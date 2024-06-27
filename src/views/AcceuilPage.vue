@@ -56,7 +56,7 @@ const taked = ref(3);
                     <!-- Textes de la page d'acceuil -->
                     <p>Si vous vous êtes déjà demandé si votre cerveau était capable de traiter rapidement des informations
                         visuelles ou non, ce quiz simple est fait pour vous ! La règle est très simple : lorsque  le
-                        cercle rouge tourne vert, appuyez/cliquez sur le bouton gauche de la souris sur l'écran aussi vite que possible
+                        cercle <span class="red">rouge</span> tourne au <span class="green">vert</span>, appuyez/cliquez sur le bouton gauche de la souris sur l'écran aussi vite que possible
                         !
                     </p>
                     <p>Le temps de réaction moyen à un stimulus visuel est d'environ 250 ms (millisecondes) et la plupart des
@@ -186,15 +186,19 @@ const taked = ref(3);
         padding: 8px;
     }
     ul {
-        position: sticky;
+        position: relative;
         display: flex;
+        align-items: center;
+        justify-content: center;
         list-style: none;
         gap: 2%;
         text-align: center;
         text-decoration: none;
-        font-size: 16px;
-        padding: 20px;
-        font-size: 20px;
+        padding: 15px;
+        margin-top: 1.8rem;
+        margin-bottom: -1.rem;
+        font-size: 18px;
+        opacity: 0.8;
     }
     .list{
         background-color:white ;
@@ -218,7 +222,20 @@ const taked = ref(3);
     }
 
     p{
-        font-size: 20px;
+        font-size: 18px;
+        opacity: 0.8;
+    }
+    .red{
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        padding: 3px;
+    }
+    .green{
+        background-color: green;
+        color: white;
+        font-weight: bold;
+        padding: 3px;
     }
     .start{
         background-color: rgb(13, 110, 253);
@@ -228,11 +245,11 @@ const taked = ref(3);
         border-radius: 4px;
         text-decoration: none;
         max-width: 100%;
-        font-size: 20px;
+        font-size: 18px;
     }
     .start:hover{
         background-color: rgb(10, 10, 167);
-        font-size: 25px;
+        font-size: 22px;
     }
     .end{
         text-align: center;
