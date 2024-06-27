@@ -5,6 +5,7 @@ import { ref } from "vue";
 <template>
 <div class="Warning">
     <div class="container">
+        <!-- Message d'erreur -->
         <span><img src="/src/assets/Warning.png" alt="warning"></span>
         <p>This page is not available !!!</p>
     </div>

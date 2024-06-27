@@ -1,7 +1,19 @@
 <script setup>
 import { ref } from "vue";
+<<<<<<< HEAD
 import { RouterLink } from "vue-router";
 // const data = ref([{ Rank: "0", Name: "GFB", Reaction: "GH", Date: "GH" }]);
+=======
+// En-tête du tableau
+const data = ref([
+    {Rank:"0",
+    Name:"GFB",
+    Reaction:"GH",
+    Date:"GH",
+    }
+    ]);
+</script>
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 
 const props = defineProps({
   data: Array,
@@ -10,6 +22,10 @@ const props = defineProps({
 
 <template>
   <div>
+<<<<<<< HEAD
+=======
+    <!-- Tableau récapitulatif des résultats du test -->
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     <h2>Reaction Time Test Highscores</h2>
     <div>
       <table>
