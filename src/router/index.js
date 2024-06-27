@@ -36,8 +36,8 @@ const router = createRouter({
 
     {
       path :"/score",
-    name : 'Score' ,
-    component : scoreComponent
+      name : 'Score' ,
+      component : scoreComponent
     },
     ]
 })

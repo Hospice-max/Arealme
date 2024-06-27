@@ -37,7 +37,6 @@ function handleSubmit() {
   top: 0;
   bottom: 0;
   font-size: 20px;
-  border: 1px solid rgb(252, 16, 16);
   background-color: rgba(45, 43, 43, 0.342);
   display: flex;
   justify-content: center;
