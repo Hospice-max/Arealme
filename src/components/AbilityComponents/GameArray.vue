@@ -1,10 +1,17 @@
 <script setup>
 import { ref, onMounted, watch, reactive } from "vue";
-import scoreComponents from "@/components/scoreComponents.vue";
+import ScoreComponent from "@/components/ScoreComponent.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
+<<<<<<< HEAD
+
+const props = defineProps({
+  countAttmpts: Number,
+});
+
+=======
 /*Initialisation des variables pour le stockage des données du joueur en fonction du click, du temps et de la réactivité*/
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 let time = Math.floor(Math.random() * 3000);
-console.log(time);
 const isRed = ref(true);
 let startTime = ref(0);
 let endTime = ref(0);
@@ -13,15 +20,16 @@ let survey = ref(true);
 let diffTime = ref(0);
 let gameTab = ref([]);
 let idValue = ref(1);
-let childrenProps = reactive({
+const childrenProps = ref({
   id: "",
-  green: "",
-  atTaked: 3,
+  green: [],
+  atTaked: props.countAttmpts,
 });
 let change = ref(true);
-let newTemp = 3;
+let newTemp = props.countAttmpts;
 
 const gameData = ref({});
+const isScoreVisible = ref(false);
 
 const method = (param) => {
   if (idValue.value <= newTemp) {
@@ -41,7 +49,6 @@ let reboot = () => {
 function clickReact() {
   if (isRed.value === true) {
     badClick.value++;
-    console.log(badClick.value);
   } else {
     endTime.value = performance.now();
 
@@ -53,12 +60,13 @@ function clickReact() {
       red: badClick.value,
     });
 
-    childrenProps.id = idValue.value;
-
-    childrenProps.green = diffTime.value;
-
+    childrenProps.value.id = idValue.value;
+    childrenProps.value.green.push(Math.floor(diffTime.value));
     idValue.value++;
+<<<<<<< HEAD
+=======
 
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     change.value = false;
 
     reboot();
@@ -66,6 +74,8 @@ function clickReact() {
 }
 // Lancement du jeu et définition du temps d'attente entre le rouge et le vert
 const startGame = () => {
+  time = Math.floor(Math.random() * 3000);
+
   const timeoutId = setTimeout(() => {
     isRed.value = false;
     startTime.value = performance.now();
@@ -76,8 +86,26 @@ const startGame = () => {
 };
 
 const atGameEnd = (data) => {
+  isScoreVisible.value = true;
   gameData.value = data;
+  saveDatas();
 };
+
+function saveDatas() {
+  if (!localStorage.getItem("gamesData")) {
+    const localDatas = [];
+    localDatas.push(gameData.value);
+    localStorage.setItem("gamesData", JSON.stringify(localDatas));
+  } else {
+    const localDatas = JSON.parse(localStorage.getItem("gamesData"));
+    localDatas.push(gameData.value);
+    localStorage.setItem("gamesData", JSON.stringify(localDatas));
+  }
+}
+
+function getDatas() {
+  return JSON.parse(localStorage.getItem("gamesData")) ?? [];
+}
 
 watch(() => survey.value, clickReact);
 
@@ -87,8 +115,15 @@ onMounted(() => {
 </script>
 
 <template>
+<<<<<<< HEAD
+  <div v-if="isScoreVisible">
+    <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
+  </div>
+  <div v-else class="textContainer">
+=======
 <!-- Changement de couleur du rouge au vert pour le cercle du jeu -->
   <div class="textContainer">
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     <div v-if="change === true">
       <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
       <p v-else>MAINTENANT!</p>
@@ -102,6 +137,8 @@ onMounted(() => {
     <TimerComponents
       v-else-if="change === false"
       :childrenProps="childrenProps"
+      :currentTentative="idValue"
+      :gameRoundsData="gameTab"
       @response="method"
       @emitGameData="atGameEnd" 
     /> <!-- Récupération du émit émit par (TimerComponents.vue) pour la moyenne du joueur -->

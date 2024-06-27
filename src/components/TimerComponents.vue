@@ -1,42 +1,69 @@
 <template>
+<<<<<<< HEAD
+  <div class="timer-container">
+    <div v-show="childrenProps.id !== 1" class="chart-container">
+      <ChartComponent :durations="durations" />
+    </div>
+    <div class="big">
+      <p>{{ childrenProps.green[childrenProps.id - 1] }} MS</p>
+      <div class="elCenter">
+        <div
+          v-if="childrenProps.id !== childrenProps.atTaked"
+          class="container"
+        >
+          <p>{{ decompteVal }}</p>
+        </div>
+        <div v-else>Evaluation...</div>
+      </div>
+      <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
+      <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
+=======
   <div class="big">
     <p>{{ childrenProps.green }} MS</p>
     <div class="elCenter">
       <div class="container">
         <p>{{ decompteVal }}</p> <!-- Affichage du décompte entre les sections du jeu -->
       </div>
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     </div>
-    <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
-    <Formulaire
-      v-if="childrenProps.id === childrenProps.atTaked"
-      @emmitGamerName="sendGameData"
-    />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import Formulaire from "./Formulaire.vue";
+<<<<<<< HEAD
+import ChartComponent from "@/components/ChartComponent.vue";
+
+=======
 // Initialisation des variables de stockage des données du joueur
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 const decompteVal = ref(3);
 const gameSessionData = ref({
   gamerName: "",
   date: "",
+  moy: 0,
 });
 
-let array = [1, 2, 3, 4, 5];
+const durations = ref([]);
+
+const isChartVisible = ref(false);
+const isFormVisible = ref(false);
 
 const props = defineProps({
   childrenProps: Object,
+  gameRoundsData: Array,
+  currentTentative: Number,
 });
+
+// durations.value.push(props.childrenProps.id);
+durations.value = [...props.childrenProps.green.map((el) => parseFloat(el))];
 
 const emit = defineEmits(["response", "emitGameData"]);
 
 function moy(element) {
-  const moyenne = Math.floor(
-    element.reduce((acc, cur) => acc + cur, 0) / element.lenght
-  );
-  return moyenne;
+  const moyScores = element.reduce((acc, cur) => acc + cur, 0);
+  return moyScores / element.length;
 }
 // Fonction de décompte du chronomètre
 function deCompte() {
@@ -44,15 +71,33 @@ function deCompte() {
     decompteVal.value--;
     if (decompteVal.value < 1) {
       clearInterval(myReact);
-      emit("response", true);
+      if (props.childrenProps.id === props.childrenProps.atTaked) {
+        gameSessionData.value.moy = moy(durations.value);
+        isFormVisible.value = true;
+      } else {
+        emit("response", true);
+      }
     }
   }, 1000);
 }
 
 onMounted(() => {
   deCompte();
+  showChart();
 });
+<<<<<<< HEAD
+
+function showChart() {
+  isChartVisible.value = true;
+}
+
+function showForm() {
+  isFormVisible.value = true;
+}
+
+=======
 // Fonction de récupération du nom du joueur à partir du composant enfant (Formulaire.vue)
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 function sendGameData(name) {
   gameSessionData.value.gamerName = name;
   gameSessionData.value.date = dateGenerator();
@@ -83,6 +128,10 @@ function dateGenerator() {
 </script>
 
 <style scoped>
+.timer-container {
+  display: flex;
+}
+
 .container {
   text-align: center;
   border: 20px solid rgb(206, 26, 26);
@@ -107,10 +156,6 @@ function dateGenerator() {
   align-content: center;
 }
 .big {
-  /* display: flex;
-    flex-direction: column;
-  justify-content: center;
-  align-content: center; */
   text-align: center;
   margin: 0 auto;
 }

@@ -6,8 +6,9 @@ import {  useRouter, useRoute } from "vue-router";
 const showCircle = ref(true);
 // un nombre de tentative non correspondant aux nombres initiaux renoiyant à la page d'acceuil
 const route = useRoute()
-const router = useRouter()
 
+
+const countAttmpts = parseInt(route.params.id)
 const array = route.path.split("/")
 const arrayEnd = array.pop()
 
@@ -22,7 +23,7 @@ if(!bool) {
 <!-- Page de lancement du jeu -->
   <div :class="{ isMonted: showCircle }" class="container" @click="showCircle = false">
     <p id="message" v-if="showCircle">Cliquez n'importe où pour commencer</p>
-    <GameArray v-else></GameArray>
+    <GameArray :countAttmpts="countAttmpts"  v-else></GameArray>
   </div>
 </template>
 
