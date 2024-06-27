@@ -52,7 +52,7 @@ function moy(element) {
   const moyScores = element.reduce((acc, cur) => acc + cur, 0);
   return moyScores / element.length;
 }
-
+// Fonction de décompte du chronomètre
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
@@ -86,7 +86,7 @@ function sendGameData(name) {
   gameSessionData.value.date = dateGenerator();
   emit("emitGameData", gameSessionData.value);
 }
-
+// Fonction de récupération de la date et du temps 
 function dateGenerator() {
   let date = new Date();
   const formatNoYear = (t) => {

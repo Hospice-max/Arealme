@@ -7,6 +7,7 @@
         ><span>is:</span>
       </div>
     </div>
+    <!-- Affichage de la perfomance et du temps moyen du joueur -->
     <div class="result">{{ displayScore }} <span id="maSpan">ms</span></div>
     <div class="Average">{{ displayAverage }}</div>
     <StarsComponent :stars="scoreData.stars" />
@@ -34,7 +35,7 @@ const categories = {
   moyen: { texte: "Moyen", limit: 2000 },
   lent: { texte: "Lent" },
 };
-
+// Stockage du temps du joueur
 const scoreData = ref({
   stars: 3,
   score: props.data.green
@@ -44,7 +45,7 @@ const scoreData = ref({
 const plafond = scoreData.value.score + 1000;
 const displayScore = ref(plafond);
 const displayAverage = ref("");
-
+// Analyse du score du joueur en fonction des catégories de perfomance
 onMounted(() => {
   if (scoreData.value.score > categories.moyen.limit) {
     displayAverage.value = categories.lent.texte;

@@ -3,7 +3,7 @@ import { ref } from "vue";
 const inputValue = ref("");
 
 const emit = defineEmits(["emmitGamerName"]);
-
+// Fonction de récupération du nom du joueur
 function handleSubmit() {
   if (inputValue.value.trim()) {
     emit("emmitGamerName", inputValue.value);
@@ -22,6 +22,7 @@ function handleSubmit() {
         <div class="button">
           <button class="btn1">D'ACCORD</button>
         <RouterLink class="btn2" to="/">Annuler</RouterLink>
+
         </div>
       </form>
     </div>

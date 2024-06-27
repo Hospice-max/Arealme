@@ -2,11 +2,15 @@
 import { ref, onMounted, watch, reactive } from "vue";
 import ScoreComponent from "@/components/ScoreComponent.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
+<<<<<<< HEAD
 
 const props = defineProps({
   countAttmpts: Number,
 });
 
+=======
+/*Initialisation des variables pour le stockage des données du joueur en fonction du click, du temps et de la réactivité*/
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 let time = Math.floor(Math.random() * 3000);
 const isRed = ref(true);
 let startTime = ref(0);
@@ -33,7 +37,7 @@ const method = (param) => {
     startGame();
   }
 };
-
+// Réinitialisation après le décompte
 let reboot = () => {
   isRed.value = true;
   endTime.value = 0;
@@ -41,7 +45,7 @@ let reboot = () => {
   startGame.value = 0;
   badClick.value = 0;
 };
-
+/* Fonction de récupération des statistiques du joueur sur le nombre et le temps de click sur le rouge et le vert*/
 function clickReact() {
   if (isRed.value === true) {
     badClick.value++;
@@ -59,12 +63,16 @@ function clickReact() {
     childrenProps.value.id = idValue.value;
     childrenProps.value.green.push(Math.floor(diffTime.value));
     idValue.value++;
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     change.value = false;
 
     reboot();
   }
 }
-
+// Lancement du jeu et définition du temps d'attente entre le rouge et le vert
 const startGame = () => {
   time = Math.floor(Math.random() * 3000);
 
@@ -107,10 +115,15 @@ onMounted(() => {
 </script>
 
 <template>
+<<<<<<< HEAD
   <div v-if="isScoreVisible">
     <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
   </div>
   <div v-else class="textContainer">
+=======
+<!-- Changement de couleur du rouge au vert pour le cercle du jeu -->
+  <div class="textContainer">
+>>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     <div v-if="change === true">
       <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
       <p v-else>MAINTENANT!</p>
@@ -127,8 +140,9 @@ onMounted(() => {
       :currentTentative="idValue"
       :gameRoundsData="gameTab"
       @response="method"
-      @emitGameData="atGameEnd"
-    />
+      @emitGameData="atGameEnd" 
+    /> <!-- Récupération du émit émit par (TimerComponents.vue) pour la moyenne du joueur -->
+    
   </div>
 </template>
 
