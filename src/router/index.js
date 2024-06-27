@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AcceuilPage from "@/views/AcceuilPage.vue";
 import AbilityPage from '@/views/AbilityPage.vue';
 import ErrorPage from "@/components/ErrorPage.vue";
-import scoreComponent from "@/components/scoreComponents.vue";
+import scoreComponent from "@/components/ScoreComponent.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
