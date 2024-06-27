@@ -75,3 +75,7 @@ function addItems() {
   }
 }
 </script>
+
+<style scoped>
+
+</style>
