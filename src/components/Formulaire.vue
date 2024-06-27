@@ -21,8 +21,8 @@ function handleSubmit() {
         <input type="text" v-model="inputValue" />
         <div class="button">
           <button class="btn1">D'ACCORD</button>
+        <RouterLink class="btn2" to="/">Annuler</RouterLink>
 
-          <RouterLink class="btn2" to="/score">Annuler</RouterLink>
         </div>
       </form>
     </div>
@@ -37,7 +37,6 @@ function handleSubmit() {
   top: 0;
   bottom: 0;
   font-size: 20px;
-  background-color: rgba(45, 43, 43, 0.342);
   display: flex;
   justify-content: center;
   align-items: center;

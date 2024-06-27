@@ -12,7 +12,7 @@
         >
           <p>{{ decompteVal }}</p>
         </div>
-        <div v-else>Evaluation...</div>
+        <div class="texte" v-else>Evaluation...</div>
       </div>
       <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
       <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
@@ -117,7 +117,7 @@ function dateGenerator() {
 
 .container {
   text-align: center;
-  border: 20px solid rgb(206, 26, 26);
+  border: 20px solid rgb(241, 238, 238);
   height: 200px;
   width: 200px;
   border-radius: 100%;
@@ -130,7 +130,6 @@ function dateGenerator() {
 
 .span {
   display: flex;
-
   margin-right: 50rem;
 }
 .elCenter {
@@ -141,5 +140,12 @@ function dateGenerator() {
 .big {
   text-align: center;
   margin: 0 auto;
+  color: white;
+  font-size: 50px;
+}
+.texte{
+  color: white;
+  font-size: 50px ;
+  
 }
 </style>
