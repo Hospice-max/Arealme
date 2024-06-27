@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="timer-container">
     <div v-show="childrenProps.id !== 1" class="chart-container">
       <ChartComponent :durations="durations" />
@@ -17,14 +16,6 @@
       </div>
       <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
       <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
-=======
-  <div class="big">
-    <p>{{ childrenProps.green }} MS</p>
-    <div class="elCenter">
-      <div class="container">
-        <p>{{ decompteVal }}</p> <!-- Affichage du décompte entre les sections du jeu -->
-      </div>
->>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
     </div>
   </div>
 </template>
@@ -32,12 +23,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Formulaire from "./Formulaire.vue";
-<<<<<<< HEAD
 import ChartComponent from "@/components/ChartComponent.vue";
 
-=======
-// Initialisation des variables de stockage des données du joueur
->>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 const decompteVal = ref(3);
 const gameSessionData = ref({
   gamerName: "",
@@ -85,7 +72,6 @@ onMounted(() => {
   deCompte();
   showChart();
 });
-<<<<<<< HEAD
 
 function showChart() {
   isChartVisible.value = true;
@@ -95,9 +81,6 @@ function showForm() {
   isFormVisible.value = true;
 }
 
-=======
-// Fonction de récupération du nom du joueur à partir du composant enfant (Formulaire.vue)
->>>>>>> bc647182fc587e1dd79949103b2dccbb6b6688a9
 function sendGameData(name) {
   gameSessionData.value.gamerName = name;
   gameSessionData.value.date = dateGenerator();
