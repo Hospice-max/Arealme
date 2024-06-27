@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+// En-tête du tableau
 const data = ref([
     {Rank:"0",
     Name:"GFB",
@@ -12,7 +13,7 @@ const data = ref([
 
 <template>
   <div>
-    
+    <!-- Tableau récapitulatif des résultats du test -->
     <h2>Reaction Time Test Highscores</h2>
     <table>
       <thead>

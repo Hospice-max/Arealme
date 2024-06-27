@@ -71,7 +71,9 @@ const taked = ref(3);
                     <!-- Redirection du boutton commencer ver la page du jeu -->
                     <RouterLink 
                     class="start" 
-                    :to="{name: 'Ability', params: {id:taked}}">Commencer</RouterLink>
+                    :to="{name: 'Ability', params: {id:taked}}">Commencer
+                    </RouterLink>
+                   
                 </div>
                 <p class="par">Défi des joueurs professionnels</p>
             </article>
@@ -225,7 +227,7 @@ const taked = ref(3);
         border: none;
         border-radius: 4px;
         text-decoration: none;
-        max-width: 10%;
+        max-width: 100%;
         font-size: 20px;
     }
     .start:hover{

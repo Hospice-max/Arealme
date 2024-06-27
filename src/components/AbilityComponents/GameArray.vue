@@ -2,7 +2,7 @@
 import { ref, onMounted, watch, reactive } from "vue";
 import scoreComponents from "@/components/scoreComponents.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
-
+/*Initialisation des variables pour le stockage des données du joueur en fonction du click, du temps et de la réactivité*/
 let time = Math.floor(Math.random() * 3000);
 console.log(time);
 const isRed = ref(true);
@@ -29,7 +29,7 @@ const method = (param) => {
     startGame();
   }
 };
-
+// Réinitialisation après le décompte
 let reboot = () => {
   isRed.value = true;
   endTime.value = 0;
@@ -37,7 +37,7 @@ let reboot = () => {
   startGame.value = 0;
   badClick.value = 0;
 };
-
+/* Fonction de récupération des statistiques du joueur sur le nombre et le temps de click sur le rouge et le vert*/
 function clickReact() {
   if (isRed.value === true) {
     badClick.value++;
@@ -59,24 +59,19 @@ function clickReact() {
 
     idValue.value++;
 
-    console.log(childrenProps);
-
     change.value = false;
 
     reboot();
   }
 }
-
+// Lancement du jeu et définition du temps d'attente entre le rouge et le vert
 const startGame = () => {
   const timeoutId = setTimeout(() => {
     isRed.value = false;
     startTime.value = performance.now();
-    console.log("timout lancé");
     if (idValue.value > newTemp) {
       clearTimeout(timeoutId);
     }
-
-    console.log("startGame timeout");
   }, time);
 };
 
@@ -92,6 +87,7 @@ onMounted(() => {
 </script>
 
 <template>
+<!-- Changement de couleur du rouge au vert pour le cercle du jeu -->
   <div class="textContainer">
     <div v-if="change === true">
       <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
@@ -107,8 +103,9 @@ onMounted(() => {
       v-else-if="change === false"
       :childrenProps="childrenProps"
       @response="method"
-      @emitGameData="atGameEnd"
-    />
+      @emitGameData="atGameEnd" 
+    /> <!-- Récupération du émit émit par (TimerComponents.vue) pour la moyenne du joueur -->
+    
   </div>
 </template>
 

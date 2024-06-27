@@ -3,7 +3,7 @@
     <p>{{ childrenProps.green }} MS</p>
     <div class="elCenter">
       <div class="container">
-        <p>{{ decompteVal }}</p>
+        <p>{{ decompteVal }}</p> <!-- Affichage du décompte entre les sections du jeu -->
       </div>
     </div>
     <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
@@ -17,7 +17,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import Formulaire from "./Formulaire.vue";
-
+// Initialisation des variables de stockage des données du joueur
 const decompteVal = ref(3);
 const gameSessionData = ref({
   gamerName: "",
@@ -38,7 +38,7 @@ function moy(element) {
   );
   return moyenne;
 }
-
+// Fonction de décompte du chronomètre
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
@@ -46,20 +46,19 @@ function deCompte() {
       clearInterval(myReact);
       emit("response", true);
     }
-    console.log("deCompte setIntervalle");
   }, 1000);
 }
 
 onMounted(() => {
   deCompte();
 });
-
+// Fonction de récupération du nom du joueur à partir du composant enfant (Formulaire.vue)
 function sendGameData(name) {
   gameSessionData.value.gamerName = name;
   gameSessionData.value.date = dateGenerator();
   emit("emitGameData", gameSessionData.value);
 }
-
+// Fonction de récupération de la date et du temps 
 function dateGenerator() {
   let date = new Date();
   const formatNoYear = (t) => {

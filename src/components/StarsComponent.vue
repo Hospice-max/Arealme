@@ -9,6 +9,7 @@ const props = defineProps({
 
 
 <template>
+<!-- Affichage des étoiles et des icones pour le résultat final du joueur -->
   <div class="etoile">
     <div v-if="props.stars === 1">
       <EmptyStarIcone />
