@@ -140,8 +140,4 @@ h1 {
   text-align: center;
   background-color: #fafafa;
 }
-
-/* .table-area {
-  background-color: #fff;
-} */
 </style>
