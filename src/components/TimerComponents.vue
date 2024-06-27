@@ -3,7 +3,6 @@
     <div v-show="childrenProps.id !== 1" class="chart-container">
       <ChartComponent :durations="durations" />
     </div>
-
     <div class="big">
       <p>{{ childrenProps.green[childrenProps.id - 1] }} MS</p>
       <div class="elCenter">
@@ -17,11 +16,7 @@
       </div>
       <div>{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
       <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
-      <!-- <Formulaire v-show="isFormVisible" @emmitGamerName="sendGameData" /> -->
     </div>
-    <!-- <div>
-      <ScoreComponent />
-    </div> -->
   </div>
 </template>
 
@@ -30,14 +25,11 @@ import { ref, onMounted } from "vue";
 import Formulaire from "./Formulaire.vue";
 import ChartComponent from "@/components/ChartComponent.vue";
 
-// components
-import ScoreComponent from "./ScoreComponent.vue";
-import { watch } from "vue";
-
 const decompteVal = ref(3);
 const gameSessionData = ref({
   gamerName: "",
   date: "",
+  moy: 0,
 });
 
 const durations = ref([]);
@@ -45,39 +37,29 @@ const durations = ref([]);
 const isChartVisible = ref(false);
 const isFormVisible = ref(false);
 
-let array = [1, 2, 3, 4, 5];
-
 const props = defineProps({
   childrenProps: Object,
   gameRoundsData: Array,
   currentTentative: Number,
 });
 
-durations.value.push(props.childrenProps.id);
+// durations.value.push(props.childrenProps.id);
 durations.value = [...props.childrenProps.green.map((el) => parseFloat(el))];
-
-console.log("durations : ", durations.value);
-
-// console.log("test", ids.value, durations.value);
-// console.log("currentTentative", props.currentTentative);
 
 const emit = defineEmits(["response", "emitGameData"]);
 
 function moy(element) {
-  const moyenne = Math.floor(
-    element.reduce((acc, cur) => acc + cur, 0) / element.lenght
-  );
-  return moyenne;
+  const moyScores = element.reduce((acc, cur) => acc + cur, 0);
+  return moyScores / element.length;
 }
 
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
-    console.log("decomptVal => ", decompteVal.value);
     if (decompteVal.value < 1) {
       clearInterval(myReact);
       if (props.childrenProps.id === props.childrenProps.atTaked) {
-        moy(durations.value);
+        gameSessionData.value.moy = moy(durations.value);
         isFormVisible.value = true;
       } else {
         emit("response", true);
@@ -157,10 +139,6 @@ function dateGenerator() {
   align-content: center;
 }
 .big {
-  /* display: flex;
-    flex-direction: column;
-  justify-content: center;
-  align-content: center; */
   text-align: center;
   margin: 0 auto;
 }

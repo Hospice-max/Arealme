@@ -1,10 +1,13 @@
 <script setup>
 import { ref, onMounted, watch, reactive } from "vue";
-import scoreComponents from "@/components/ScoreComponent.vue";
+import ScoreComponent from "@/components/ScoreComponent.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
 
+const props = defineProps({
+  countAttmpts: Number,
+});
+
 let time = Math.floor(Math.random() * 3000);
-console.log(time);
 const isRed = ref(true);
 let startTime = ref(0);
 let endTime = ref(0);
@@ -16,12 +19,13 @@ let idValue = ref(1);
 const childrenProps = ref({
   id: "",
   green: [],
-  atTaked: 3,
+  atTaked: props.countAttmpts,
 });
 let change = ref(true);
-let newTemp = 3;
+let newTemp = props.countAttmpts;
 
 const gameData = ref({});
+const isScoreVisible = ref(false);
 
 const method = (param) => {
   if (idValue.value <= newTemp) {
@@ -41,7 +45,6 @@ let reboot = () => {
 function clickReact() {
   if (isRed.value === true) {
     badClick.value++;
-    console.log(badClick.value);
   } else {
     endTime.value = performance.now();
 
@@ -54,13 +57,8 @@ function clickReact() {
     });
 
     childrenProps.value.id = idValue.value;
-    childrenProps.value.green.push(diffTime.value);
-
+    childrenProps.value.green.push(Math.floor(diffTime.value));
     idValue.value++;
-    console.log("idValue ", idValue.value);
-
-    console.log(childrenProps.value);
-
     change.value = false;
 
     reboot();
@@ -68,21 +66,38 @@ function clickReact() {
 }
 
 const startGame = () => {
+  time = Math.floor(Math.random() * 3000);
+
   const timeoutId = setTimeout(() => {
     isRed.value = false;
     startTime.value = performance.now();
-    console.log("timout lancé");
     if (idValue.value > newTemp) {
       clearTimeout(timeoutId);
     }
-
-    console.log("startGame timeout");
   }, time);
 };
 
 const atGameEnd = (data) => {
+  isScoreVisible.value = true;
   gameData.value = data;
+  saveDatas();
 };
+
+function saveDatas() {
+  if (!localStorage.getItem("gamesData")) {
+    const localDatas = [];
+    localDatas.push(gameData.value);
+    localStorage.setItem("gamesData", JSON.stringify(localDatas));
+  } else {
+    const localDatas = JSON.parse(localStorage.getItem("gamesData"));
+    localDatas.push(gameData.value);
+    localStorage.setItem("gamesData", JSON.stringify(localDatas));
+  }
+}
+
+function getDatas() {
+  return JSON.parse(localStorage.getItem("gamesData")) ?? [];
+}
 
 watch(() => survey.value, clickReact);
 
@@ -92,7 +107,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="textContainer">
+  <div v-if="isScoreVisible">
+    <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
+  </div>
+  <div v-else class="textContainer">
     <div v-if="change === true">
       <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
       <p v-else>MAINTENANT!</p>

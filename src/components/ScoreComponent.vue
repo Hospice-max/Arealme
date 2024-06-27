@@ -11,23 +11,23 @@
     <div class="Average">{{ displayAverage }}</div>
     <StarsComponent :stars="scoreData.stars" />
   </div>
+  <div class="btn-container">
+    <RouterLink to="/">Recommencer</RouterLink>
+  </div>
 
-
-   
-  <HighscoresTableComponent />
-
-  <div>
-
+  <div class="table-area">
+    <HighscoresTableComponent :data="tableDatas" />
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
 import StarsComponent from "@/components/StarsComponent.vue";
+import HighscoresTableComponent from "@/components/HighscoresTableComponent.vue";
 
-
-import HighscoresTableComponent from "@/components/HighscoresTableComponent.vue"
-
-const plafond = 3000;
+const props = defineProps({
+  data: Object,
+  tableDatas: Array,
+});
 
 const categories = {
   rapide: { texte: "Rapide", limit: 1000 },
@@ -36,11 +36,12 @@ const categories = {
 };
 
 const scoreData = ref({
-  id: 1256552,
-  stars: 0,
-  score: 999,
+  stars: 3,
+  score: props.data.green
+    .map((el) => parseFloat(el))
+    .reduce((acc, curr) => acc + curr, 0),
 });
-
+const plafond = scoreData.value.score + 1000;
 const displayScore = ref(plafond);
 const displayAverage = ref("");
 
@@ -125,4 +126,21 @@ h1 {
 .chart-container {
   background-color: lightskyblue;
 }
+
+.btn-container {
+  text-align: center;
+}
+
+.btn-container a {
+  color: #877500;
+  padding: 8px;
+  margin: 12px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #fafafa;
+}
+
+/* .table-area {
+  background-color: #fff;
+} */
 </style>
