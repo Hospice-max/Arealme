@@ -22,7 +22,7 @@ if(!bool) {
 <template>
 <!-- Page de lancement du jeu -->
   <div :class="{ isMonted: showCircle }" class="container" @click="showCircle = false">
-    <p id="message" v-if="showCircle">Cliquez n'importe où pour commencer</p>
+    <p id="message" v-if="showCircle">Appuyez n'importe où pour commencer</p>
     <GameArray :countAttmpts="countAttmpts"  v-else></GameArray>
   </div>
 </template>

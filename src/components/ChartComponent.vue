@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-if="data.tentative !== 1"> -->
-  <div v-if="true" style="width: 600px">
+  <div v-if="true" style="width: 500px">
     <canvas ref="graph"></canvas>
   </div>
 </template>
@@ -80,7 +80,6 @@ onMounted(() => {
     
   }
 });
-
 function addItems() {
   for (let i in [1, 2, 3]) {
     abscisse.value.push(Number(i));
