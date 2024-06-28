@@ -1,5 +1,4 @@
 <template>
-  <h1>Score Component</h1>
   <div class="container1">
     <div class="firstPart">
       <div>
@@ -42,27 +41,32 @@ const scoreData = ref({
     .map((el) => parseFloat(el))
     .reduce((acc, curr) => acc + curr, 0),
 });
-const plafond = scoreData.value.score + 1000;
+const moyenne = Math.round((scoreData.value.score / props.data.green.length));
+
+const plafond = moyenne + 1000;
 const displayScore = ref(plafond);
 const displayAverage = ref("");
+
+
+
 // Analyse du score du joueur en fonction des catégories de perfomance
 onMounted(() => {
-  if (scoreData.value.score > categories.moyen.limit) {
+  if (moyenne > categories.moyen.limit) {
     displayAverage.value = categories.lent.texte;
     scoreData.value.stars = 1;
   } else if (
-    scoreData.value.score > categories.rapide.limit &&
-    scoreData.value.score <= categories.moyen.limit
+    moyenne > categories.rapide.limit &&
+    moyenne <= categories.moyen.limit
   ) {
     displayAverage.value = categories.moyen.texte;
     scoreData.value.stars = 2;
-  } else if (scoreData.value.score < categories.rapide.limit) {
+  } else if (moyenne < categories.rapide.limit) {
     displayAverage.value = categories.rapide.texte;
     scoreData.value.stars = 3;
   }
 
   const intervalId = setInterval(() => {
-    if (displayScore.value > scoreData.value.score) {
+    if (displayScore.value > moyenne) {
       displayScore.value--;
     } else {
       clearInterval(intervalId);

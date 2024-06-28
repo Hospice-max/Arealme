@@ -30,6 +30,7 @@ onMounted(() => {
       labels: ids.value,
       datasets: [
         {
+         
           label: "Progression du test en cours",
           data: props.durations,
           fill: false,
@@ -60,12 +61,23 @@ onMounted(() => {
           },
         },
       },
+      plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    color: 'rgb(246, 242, 242)'
+                }
+            }
+        },
+        
     };
     const config = new Chart(ctx, {
       type: "line",
       data: dataCanvas,
       options: miseEnForme,
+      
     });
+    
   }
 });
 

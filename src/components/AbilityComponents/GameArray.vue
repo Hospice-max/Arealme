@@ -173,7 +173,7 @@ onMounted(() => {
 }
 
 p {
-  color: white;
+  color: rgb(246, 242, 242);
   font-weight: bold;
   font-size: 30px;
   margin-bottom: 25px;

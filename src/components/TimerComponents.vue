@@ -50,7 +50,7 @@ const emit = defineEmits(["response", "emitGameData"]);
 
 function moy(element) {
   const moyScores = element.reduce((acc, cur) => acc + cur, 0);
-  return moyScores / element.length;
+  return Math.floor( moyScores / element.length);
 }
 // Fonction de décompte du chronomètre
 function deCompte() {
@@ -94,7 +94,7 @@ function dateGenerator() {
     return t;
   };
   return `${
-    formatNoYear(date.getDay()) +
+    formatNoYear(date.getDate()) +
     "-" +
     formatNoYear(date.getMonth()) +
     "-" +
