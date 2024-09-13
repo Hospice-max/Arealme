@@ -18,8 +18,7 @@ function handleStart() {
 <template>
   <!-- Page de lancement du jeu -->
   <div :class="{ 'cursor-pointer': showCircle }"
-       class="flex items-center justify-center min-h-screen w-screen bg-[#3a577f]"
-       @click="handleStart">
+    class="flex items-center justify-center min-h-screen w-screen bg-[#3a577f]" @click="handleStart">
     <p v-if="showCircle" class="text-white text-3xl font-bold animate-blink">
       Appuyez n'importe où pour commencer
     </p>
@@ -29,9 +28,17 @@ function handleStart() {
 
 <style scoped>
 @keyframes blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .animate-blink {

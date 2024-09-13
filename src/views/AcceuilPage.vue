@@ -32,12 +32,12 @@ const startTest = () => {
 <template>
     <!-- Conteneur principal avec centrage et pleine hauteur d'écran -->
     <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-900">
-        
+
         <!-- Contenu principal, caché si le test est démarré -->
         <div v-if="!isContentHidden"
             class="w-full max-w-3xl p-8 bg-white shadow-lg rounded-lg transition-all duration-500 ease-in-out transform"
             :class="{ 'opacity-0 scale-90': isContentHidden }">
-            
+
             <!-- Barre de navigation -->
             <nav class="flex justify-between items-center mb-8">
                 <button class="text-gray-600">
@@ -57,36 +57,39 @@ const startTest = () => {
             <!-- Titre et description -->
             <article>
                 <h1 class="text-2xl font-bold text-center text-green-700 mb-6">Test de temps de réaction</h1>
-                
+
                 <!-- Liste des boutons numérotés -->
                 <ul class="flex justify-center space-x-4 mb-4">
                     <li v-for="(dig, index) in number" :key="index">
-                        <button class="px-4 py-2 rounded-lg text-white bg-gray-300 hover:bg-blue-600 transition duration-300"
-                            :class="{ 
-                                'bg-blue-600': taked == dig.value,
+                        <button
+                            class="px-4 py-2 rounded-lg text-white bg-gray-300 hover:bg-[#3a577f] transition duration-300"
+                            :class="{
+                                'bg-[#3a577f]': taked == dig.value,
                                 'pointer-events-none': isContentHidden // Empêche les interactions avec les boutons après sélection
-                            }"
-                            @click="taked = dig.value">
+                            }" @click="taked = dig.value">
                             {{ dig.digit }}
                         </button>
+
                     </li>
                 </ul>
 
                 <!-- Description textuelle -->
                 <p class="text-gray-700 text-base leading-6 mb-4">
-                    Si vous vous êtes déjà demandé si votre cerveau pouvait traiter rapidement des informations visuelles, ce test
+                    Si vous vous êtes déjà demandé si votre cerveau pouvait traiter rapidement des informations
+                    visuelles, ce test
                     est pour vous ! Quand le cercle <span class="font-bold text-red-500">rouge</span> devient
                     <span class="font-bold text-green-500">vert</span>, cliquez aussi vite que possible !
                 </p>
 
                 <p class="text-gray-700 text-base leading-6 mb-4">
-                    Le temps de réaction moyen à un stimulus visuel est d'environ 250 ms (millisecondes). 
+                    Le temps de réaction moyen à un stimulus visuel est d'environ 250 ms (millisecondes).
                     Si vous pensez pouvoir battre des records, n'hésitez pas à nous envoyer une vidéo de vos résultats !
                 </p>
 
                 <!-- Bouton Commencer -->
                 <div class="text-center">
-                    <button class="bg-orange-500 text-white py-2 px-6 rounded-lg hover:bg-orange-600 text-lg transition duration-300 transform hover:scale-105"
+                    <button
+                        class="bg-orange-500 text-white py-2 px-6 rounded-lg hover:bg-orange-600 text-lg transition duration-300 transform hover:scale-105"
                         @click="startTest">
                         Commencer
                     </button>

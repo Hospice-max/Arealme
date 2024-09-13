@@ -7,31 +7,10 @@ const props = defineProps({
 });
 </script>
 
-
 <template>
-<!-- Affichage des étoiles et des icones pour le résultat final du joueur -->
-  <div class="etoile">
-    <div v-if="props.stars === 1">
-      <EmptyStarIcone />
-    </div>
-
-    <div v-else-if="props.stars === 2">
-      <FilledStarIcone />
-      <FilledStarIcone />
-    </div>
-
-    <div v-else>
-      <FilledStarIcone />
-      <FilledStarIcone />
-      <FilledStarIcone />
-    </div>
+  <div class="flex justify-center space-x-1">
+    <template v-for="i in 3" :key="i">
+      <component :is="i <= props.stars ? FilledStarIcone : EmptyStarIcone" class="w-8 h-8 text-yellow-400" />
+    </template>
   </div>
 </template>
-
-
-
-<style scoped>
-.etoile {
-  text-align: center;
-}
-</style>

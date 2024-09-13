@@ -1,23 +1,7 @@
-<template>
-  <div v-if="isScoreVisible">
-    <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
-  </div>
-  <div v-else class="textContainer">
-    <div v-if="change === true">
-      <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
-      <p v-else>MAINTENANT!</p>
-      <div class="test_circle" :class="{ red: isRed, green: !isRed }" @click="survey = !survey"></div>
-    </div>
-
-    <TimerComponents v-else-if="change === false" :childrenProps="childrenProps" :currentTentative="idValue"
-      :gameRoundsData="gameTab" @response="method" @emitGameData="atGameEnd" />
-  </div>
-</template>
-
 <script setup>
-import { ref, onMounted, watch } from "vue";
 import ScoreComponent from "@/components/ScoreComponent.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
+import { onMounted, ref, watch } from "vue";
 
 const props = defineProps({
   countAttmpts: Number,
@@ -115,6 +99,23 @@ onMounted(() => {
 });
 </script>
 
+
+<template>
+  <div v-if="isScoreVisible">
+    <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
+  </div>
+  <div v-else class="textContainer">
+    <div v-if="change === true">
+      <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
+      <p v-else>MAINTENANT!</p>
+      <div class="test_circle" :class="{ red: isRed, green: !isRed }" @click="survey = !survey"></div>
+    </div>
+
+    <TimerComponents v-else-if="change === false" :childrenProps="childrenProps" :currentTentative="idValue"
+      :gameRoundsData="gameTab" @response="method" @emitGameData="atGameEnd" />
+  </div>
+</template>
+
 <style scoped>
 .test_circle {
   width: 300px;
@@ -123,12 +124,19 @@ onMounted(() => {
 }
 
 .red {
+
   background-color: rgb(230, 55, 55);
+
   border: 12px solid rgb(150, 50, 78);
+
   cursor: pointer;
+
 }
 
+
+
 .green {
+
   background-color: #0cf264;
   border: 12px solid rgb(35, 165, 121);
   cursor: pointer;

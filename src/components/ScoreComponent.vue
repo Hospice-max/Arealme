@@ -1,27 +1,3 @@
-<template>
-  <div class="container1">
-    <div class="firstPart">
-      <div>
-        <span>Your </span> <span class="elMiltxt">Average Reaction Time </span
-        ><span>is:</span>
-      </div>
-    </div>
-    <!-- Affichage de la perfomance et du temps moyen du joueur -->
-    <div class="result">{{ displayScore }} <span id="maSpan">ms</span></div>
-    <div class="Average">{{ displayAverage }}</div>
-    <StarsComponent :stars="scoreData.stars" />
-  </div>
-  <div class="btn-container">
-    <!-- <RouterLink to="/">Recommencer</RouterLink> -->
-    <button @click="restartGame">Recommencer</button>
-  </div>
-
-  <div class="table-area">
-    <HighscoresTableComponent :data="tableDatas" />
-  </div>
-</template>
-
-
 <script setup>
 import { ref, onMounted } from "vue";
 import StarsComponent from "@/components/StarsComponent.vue";
@@ -37,6 +13,7 @@ const categories = {
   moyen: { texte: "Moyen", limit: 2000 },
   lent: { texte: "Lent" },
 };
+
 // Stockage du temps du joueur
 const scoreData = ref({
   stars: 3,
@@ -50,8 +27,7 @@ const plafond = moyenne + 1000;
 const displayScore = ref(plafond);
 const displayAverage = ref("");
 
-
-// Analyse du score du joueur en fonction des catégories de perfomance
+// Analyse du score du joueur en fonction des catégories de performance
 onMounted(() => {
   if (moyenne > categories.moyen.limit) {
     displayAverage.value = categories.lent.texte;
@@ -78,78 +54,54 @@ onMounted(() => {
 
 function restartGame() {
   // Fonction pour redémarrer le jeu ou la page
-  window.location.reload(); 
+  window.location.reload();
 }
-
 </script>
 
+<template>
+  <div
+    class="container1 bg-[#4a6a91] h-80 w-[953px] mx-auto flex flex-col items-center justify-center text-white rounded-lg shadow-lg">
+    <div class="firstPart text-center pt-6">
+      <div class="text-xl">
+        <span>Your </span>
+        <span class="font-bold text-2xl">Average Reaction Time </span>
+        <span>is:</span>
+      </div>
+    </div>
+
+    <!-- Affichage de la performance et du temps moyen du joueur -->
+    <div class="result text-7xl mt-4">
+      {{ displayScore }} <span class="text-4xl">ms</span>
+    </div>
+    <div class="Average text-4xl mt-4">
+      {{ displayAverage }}
+    </div>
+
+    <StarsComponent :stars="scoreData.stars" />
+  </div>
+
+  <div class="btn-container text-center mt-6">
+    <button @click="restartGame"
+      class="px-6 py-2 bg-[#ff7414] text-white font-semibold rounded-lg hover:bg-[#e65b10] transition">Recommencer</button>
+
+  </div>
+
+  <div class="table-area mt-6">
+    <HighscoresTableComponent :data="tableDatas" />
+  </div>
+</template>
+
+
 <style scoped>
-* {
-  color: white;
-}
-
-@keyframes changeColor {
-  from {
-    background-color: red;
-  }
-  to {
-    background-color: #877500;
-  }
-}
-
 .container1 {
-  background-color: green;
-  height: 321px;
-  width: 953px;
-  margin: 0 auto;
-  animation-name: changeColor;
-  animation-duration: 5s;
-  animation-delay: 0s;
-}
-.firstPart {
-  padding-top: 25px;
-
-  text-align: center;
-  color: white;
-}
-.elMiltxt {
-  margin-left: 5px;
-  margin: right 5px;
-  font-weight: bold;
-}
-.result {
-  height: 120px;
-  font-size: 100px;
-  text-align: center;
-  margin-top: 10px;
-  padding-top: 10px;
-}
-#maSpan {
-  font-size: 50px;
-}
-.Average {
-  text-align: center;
-
-  font-size: 50px;
+  border-radius: 16px;
+  /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Ombre légère */
 }
 
-h1 {
-  color: #000;
-}
-.chart-container {
-  background-color: lightskyblue;
-}
-
-.btn-container {
-  text-align: center;
-}
-
-.btn-container a {
-  color: #877500;
-  padding: 8px;
-  margin: 12px;
-  text-decoration: none;
-  text-align: center;
-  background-color: #fafafa;
+.btn-container button {
+  border-radius: 12px;
+  /* Coins arrondis pour le bouton */
 }
 </style>

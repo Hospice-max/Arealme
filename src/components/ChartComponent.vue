@@ -1,10 +1,3 @@
-<template>
-  <!-- <div v-if="data.tentative !== 1"> -->
-  <div v-if="true" style="width: 500px">
-    <canvas ref="graph"></canvas>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from "vue";
 import Chart from "chart.js/auto";
@@ -17,26 +10,20 @@ const ids = ref([]);
 
 const graph = ref(null);
 
-const abscisse = [1, 2, 3]; // tentatives (ils doivent être dynamiques)
-const data = [500, 420, 800]; // temps mis pour chaque tentative
-for (let key in props.durations) {
-  ids.value.push(parseInt(key) + 1);
-}
 onMounted(() => {
   if (graph.value) {
     const ctx = graph.value.getContext("2d");
 
     const dataCanvas = {
-      labels: ids.value,
+      labels: props.durations.map((_, index) => index + 1),
       datasets: [
         {
-         
           label: "Progression du test en cours",
           data: props.durations,
           fill: false,
-          borderColor: "white",
+          borderColor: "#4A90E2",
           pointBorderColor: "#7CFC00",
-          backgroundColor: "#D3D3D3",
+          backgroundColor: "rgba(72, 162, 255, 0.2)",
           tension: 0.1,
         },
       ],
@@ -46,47 +33,64 @@ onMounted(() => {
       scales: {
         x: {
           ticks: {
-            color: "white",
+            color: "#E5E7EB",
           },
           grid: {
-            color: "white", // Change la couleur de la grille de l'axe x
+            color: "#374151", // Couleur de la grille de l'axe x
           },
         },
         y: {
           ticks: {
-            color: "white",
+            color: "#E5E7EB",
           },
           grid: {
-            color: "white", // Change la couleur de la grille de l'axe x
+            color: "#374151", // Couleur de la grille de l'axe y
           },
         },
       },
       plugins: {
-            legend: {
-                display: true,
-                labels: {
-                    color: 'rgb(246, 242, 242)'
-                }
-            }
+        legend: {
+          display: true,
+          labels: {
+            color: "#E5E7EB",
+          },
         },
-        
+      },
     };
-    const config = new Chart(ctx, {
+
+    new Chart(ctx, {
       type: "line",
       data: dataCanvas,
       options: miseEnForme,
-      
     });
-    
   }
 });
-function addItems() {
-  for (let i in [1, 2, 3]) {
-    abscisse.value.push(Number(i));
-  }
-}
 </script>
 
-<style scoped>
+<template>
+  <div>
+    <div class="chart-wrapper">
+      <canvas ref="graph" class="w-full h-80"></canvas>
+    </div>
+  </div>
+</template>
 
+<style scoped>
+.container {
+  background-color: #1F2937;
+  /* Couleur de fond sombre */
+  border-radius: 8px;
+  /* Coins arrondis pour un effet moderne */
+  padding: 2rem;
+  /* Espacement intérieur */
+}
+
+.chart-wrapper {
+  background-color: #2D3748;
+  /* Couleur de fond pour le conteneur du graphique */
+  border-radius: 8px;
+  /* Coins arrondis */
+  padding: 1rem;
+  /* Espacement intérieur */
+}
 </style>

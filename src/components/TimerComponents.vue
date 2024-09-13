@@ -1,23 +1,3 @@
-<template>
-  <p class="milli">{{ childrenProps.green[childrenProps.id - 1] }} MS</p>
-  <div class="timer-container">
-    <div v-show="childrenProps.id !== 1" class="chart-container">
-      <ChartComponent :durations="durations" />
-    </div>
-       <div
-          v-if="childrenProps.id !== childrenProps.atTaked"
-          class="container">
-          <p>{{ decompteVal }}</p>
-        </div>
-        <div class="texte" v-else>EVALUATION...</div>
-      </div>
-     
-      <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
-   
-    <div class="attempt">{{ childrenProps.id }}/{{ childrenProps.atTaked }}</div>
- 
-</template>
-
 <script setup>
 import ChartComponent from "@/components/ChartComponent.vue";
 import { onMounted, ref } from "vue";
@@ -41,16 +21,15 @@ const props = defineProps({
   currentTentative: Number,
 });
 
-// durations.value.push(props.childrenProps.id);
 durations.value = [...props.childrenProps.green.map((el) => parseFloat(el))];
 
 const emit = defineEmits(["response", "emitGameData"]);
 
 function moy(element) {
   const moyScores = element.reduce((acc, cur) => acc + cur, 0);
-  return ( moyScores / element.length);
+  return moyScores / element.length;
 }
-// Fonction de décompte du chronomètre
+
 function deCompte() {
   let myReact = setInterval(() => {
     decompteVal.value--;
@@ -84,15 +63,14 @@ function sendGameData(name) {
   gameSessionData.value.date = dateGenerator();
   emit("emitGameData", gameSessionData.value);
 }
-// Fonction de récupération de la date et du temps 
+
 function dateGenerator() {
   let date = new Date();
   const formatNoYear = (t) => {
     if (t < 10) return `0${t}`;
     return t;
   };
-  return `${
-    formatNoYear(date.getDate()) +
+  return `${formatNoYear(date.getDate()) +
     "-" +
     formatNoYear(date.getMonth()) +
     "-" +
@@ -104,57 +82,51 @@ function dateGenerator() {
     "min " +
     formatNoYear(date.getSeconds()) +
     "s"
-  }`;
+    }`;
 }
 </script>
 
-<style scoped>
-.timer-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-.milli{
-  font-size: 50px;
-  color: white;
-}
-.attempt{
-   font-size: 25px;
-   color: white;
-   padding: 30px;
-}
-.container {
-  text-align: center;
-  border: 20px solid rgb(241, 238, 238);
-  height: 200px;
-  width: 200px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 100px;
-  font-weight: bold;
-  margin-left: 25px;
-}
 
-.span {
-  display: flex;
-  margin-right: 50rem;
-}
-.elCenter {
-  display: flex;
-  justify-content: end;
-}
-.big {
-  text-align: center;
-  margin: 0 auto;
-  color: white;
-  font-size: 50px;
-}
-.texte{
-  color: white;
-  font-size: 50px ;
-  
+<template>
+  <div class="flex flex-col items-center justify-center space-y-6">
+    <p class="text-6xl font-bold text-white">
+      {{ childrenProps.green[childrenProps.id - 1] }} MS
+    </p>
+
+    <div class="flex items-center space-x-6 text-white">
+      <div v-show="childrenProps.id !== 1" class="chart-container">
+        <ChartComponent :durations="durations" />
+      </div>
+      <div v-if="childrenProps.id !== childrenProps.atTaked"
+        class="w-64 h-64 border-8 border-gray-200 rounded-full flex items-center justify-center text-6xl font-bold">
+        <p>{{ decompteVal }}</p>
+      </div>
+      <div v-else class="text-center text-4xl font-bold text-white">
+        EVALUATION...
+      </div>
+    </div>
+
+    <Formulaire v-if="isFormVisible" @emmitGamerName="sendGameData" />
+
+    <div class="text-3xl text-white py-6">
+      {{ childrenProps.id }}/{{ childrenProps.atTaked }}
+    </div>
+  </div>
+</template>
+
+
+<style scoped>
+.chart-container {
+  width: 100%;
+  max-width: 800px;
+  /* Ajuste la largeur maximale du graphique */
+  height: 500px;
+  /* Ajuste la hauteur du graphique */
+  border-radius: 8px;
+  /* Coins arrondis */
+  padding: 1rem;
+  /* Espacement intérieur */
+  background-color: transparent;
+  /* Fond transparent pour le conteneur du graphique */
 }
 </style>
