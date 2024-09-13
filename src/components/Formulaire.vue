@@ -21,8 +21,8 @@ function handleSubmit() {
         ><br />
         <input type="text" v-model="inputValue" />
         <div class="button">
-          <button class="btn1">D'ACCORD</button>
-        <RouterLink class="btn2" to="/">Annuler</RouterLink>
+          <button type="submit" class="btn1">D'ACCORD</button>
+          <button type="button" class="btn2" @click="cancel">Annuler</button>
         </div>
       </form>
     </div>

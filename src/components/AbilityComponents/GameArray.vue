@@ -1,5 +1,21 @@
+<template>
+  <div v-if="isScoreVisible">
+    <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
+  </div>
+  <div v-else class="textContainer">
+    <div v-if="change === true">
+      <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
+      <p v-else>MAINTENANT!</p>
+      <div class="test_circle" :class="{ red: isRed, green: !isRed }" @click="survey = !survey"></div>
+    </div>
+
+    <TimerComponents v-else-if="change === false" :childrenProps="childrenProps" :currentTentative="idValue"
+      :gameRoundsData="gameTab" @response="method" @emitGameData="atGameEnd" />
+  </div>
+</template>
+
 <script setup>
-import { ref, onMounted, watch, reactive } from "vue";
+import { ref, onMounted, watch } from "vue";
 import ScoreComponent from "@/components/ScoreComponent.vue";
 import TimerComponents from "@/components/TimerComponents.vue";
 
@@ -33,21 +49,20 @@ const method = (param) => {
     startGame();
   }
 };
-// Réinitialisation après le décompte
+
 let reboot = () => {
   isRed.value = true;
   endTime.value = 0;
   diffTime.value = 0;
-  startGame.value = 0;
+  startTime.value = 0;
   badClick.value = 0;
 };
-/* Fonction de récupération des statistiques du joueur sur le nombre et le temps de click sur le rouge et le vert*/
+
 function clickReact() {
-  if (isRed.value === true) {
+  if (isRed.value) {
     badClick.value++;
   } else {
     endTime.value = performance.now();
-
     diffTime.value = (endTime.value - startTime.value).toFixed(2);
 
     gameTab.value.push({
@@ -64,7 +79,7 @@ function clickReact() {
     reboot();
   }
 }
-// Lancement du jeu et définition du temps d'attente entre le rouge et le vert
+
 const startGame = () => {
   time = Math.floor(Math.random() * 3000);
 
@@ -84,15 +99,9 @@ const atGameEnd = (data) => {
 };
 
 function saveDatas() {
-  if (!localStorage.getItem("gamesData")) {
-    const localDatas = [];
-    localDatas.push(gameData.value);
-    localStorage.setItem("gamesData", JSON.stringify(localDatas));
-  } else {
-    const localDatas = JSON.parse(localStorage.getItem("gamesData"));
-    localDatas.push(gameData.value);
-    localStorage.setItem("gamesData", JSON.stringify(localDatas));
-  }
+  const localDatas = JSON.parse(localStorage.getItem("gamesData")) || [];
+  localDatas.push(gtemplaa.value);
+  localStorage.setItem("gamesData", JSON.stringify(localDatas));
 }
 
 function getDatas() {
@@ -105,33 +114,6 @@ onMounted(() => {
   startGame();
 });
 </script>
-
-<template>
-  <div v-if="isScoreVisible">
-    <ScoreComponent :data="childrenProps" :tableDatas="getDatas()" />
-  </div>
-  <div v-else class="textContainer">
-    <div v-if="change === true">
-      <p v-if="isRed">ATTENDEZ LE VERT <span class="blink">...</span></p>
-      <p v-else>MAINTENANT!</p>
-      <div
-        class="test_circle"
-        :class="{ red: isRed, green: !isRed }"
-        @click="survey = !survey"
-      ></div>
-    </div>
-
-    <TimerComponents
-      v-else-if="change === false"
-      :childrenProps="childrenProps"
-      :currentTentative="idValue"
-      :gameRoundsData="gameTab"
-      @response="method"
-      @emitGameData="atGameEnd" 
-    /> <!-- Récupération du émit émit par (TimerComponents.vue) pour la moyenne du joueur -->
-    
-  </div>
-</template>
 
 <style scoped>
 .test_circle {
@@ -164,9 +146,11 @@ onMounted(() => {
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

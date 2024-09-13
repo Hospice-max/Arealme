@@ -19,9 +19,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Formulaire from "./Formulaire.vue";
 import ChartComponent from "@/components/ChartComponent.vue";
+import { onMounted, ref } from "vue";
+import Formulaire from "./Formulaire.vue";
 
 const decompteVal = ref(3);
 const gameSessionData = ref({

@@ -1,7 +1,5 @@
 <script setup>
-import { ref } from "vue";
-import { RouterLink } from "vue-router";
-// const data = ref([{ Rank: "0", Name: "GFB", Reaction: "GH", Date: "GH" }]);
+
 
 const props = defineProps({
   data: Array,

@@ -12,13 +12,16 @@
     <StarsComponent :stars="scoreData.stars" />
   </div>
   <div class="btn-container">
-    <RouterLink to="/">Recommencer</RouterLink>
+    <!-- <RouterLink to="/">Recommencer</RouterLink> -->
+    <button @click="restartGame">Recommencer</button>
   </div>
 
   <div class="table-area">
     <HighscoresTableComponent :data="tableDatas" />
   </div>
 </template>
+
+
 <script setup>
 import { ref, onMounted } from "vue";
 import StarsComponent from "@/components/StarsComponent.vue";
@@ -41,12 +44,11 @@ const scoreData = ref({
     .map((el) => parseFloat(el))
     .reduce((acc, curr) => acc + curr, 0),
 });
-const moyenne = Math.round((scoreData.value.score / props.data.green.length));
 
+const moyenne = Math.round((scoreData.value.score / props.data.green.length));
 const plafond = moyenne + 1000;
 const displayScore = ref(plafond);
 const displayAverage = ref("");
-
 
 
 // Analyse du score du joueur en fonction des catégories de perfomance
@@ -73,6 +75,12 @@ onMounted(() => {
     }
   }, 0.5);
 });
+
+function restartGame() {
+  // Fonction pour redémarrer le jeu ou la page
+  window.location.reload(); 
+}
+
 </script>
 
 <style scoped>
